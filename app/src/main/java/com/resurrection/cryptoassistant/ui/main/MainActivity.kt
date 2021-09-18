@@ -2,18 +2,15 @@ package com.resurrection.cryptoassistant.ui.main
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.resurrection.cryptoassistant.R
 import com.resurrection.cryptoassistant.databinding.ActivityMainBinding
+import com.resurrection.cryptoassistant.ui.base.BaseActivity
 
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity<ActivityMainBinding>() {
+    override fun getLayoutRes(): Int { return R.layout.activity_main }
 
-    private lateinit var binding: ActivityMainBinding
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun init(savedInstanceState: Bundle?) {}
 
 
-    }
 }
