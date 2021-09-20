@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "117989124451",
+    "project_id": "cryptoassistant-2edc4",
+    "storage_bucket": "cryptoassistant-2edc4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:117989124451:android:b01beb48ee7611799c4b56",
+        "android_client_info": {
+          "package_name": "com.resurrection.cryptoassistant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "117989124451-obu0lokqvu5k5n8uhf17acou23u2n3o8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAyKJdX9Lyxyu2duUZ4KT2hltLRKKnrsNc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "117989124451-obu0lokqvu5k5n8uhf17acou23u2n3o8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

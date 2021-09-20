@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.auth.LoginFragment">
+        >
+
+
+        <RelativeLayout
+            android:id="@+id/authTopRelativelayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="280dp"
+                android:background="@color/primary_color" />
+
+
+        </RelativeLayout>
+
+
+        <RelativeLayout
+            android:id="@+id/authCenterLoginlayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/authTopRelativelayout"
+
+            android:layout_marginLeft="30dp"
+            android:layout_marginTop="-40dp"
+            android:layout_marginRight="30dp"
+            android:background="@drawable/rounded_rectangle_area_background"
+            android:paddingBottom="40dp">
+
+
+            <TextView
+                android:id="@+id/authHiLoginTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="20dp"
+                android:gravity="center_horizontal"
+                android:text="Login"
+                android:textColor="@color/pale_text_color"
+                android:textSize="@dimen/auth_text_size" />
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/authHiLoginTextView"
+                android:layout_marginTop="10dp"
+                android:orientation="vertical"
+                android:padding="20dp">
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Email"
+                    app:boxStrokeColor="#FF0000"
+                    app:hintTextAppearance="@style/EditTextHintStyle"
+                    app:hintTextColor="#FF0000">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editLoginEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/person_icon"
+                        android:drawablePadding="4dp"
+                        android:inputType="textEmailAddress"
+                        app:counterEnabled="true"
+                        app:counterMaxLength="15"
+                        android:text="asdasd@gmail.com"
+
+                        app:errorEnabled="true" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="Password"
+                    app:boxStrokeColor="#FF0000"
+                    app:endIconMode="password_toggle"
+                    app:hintTextAppearance="@style/EditTextHintStyle"
+                    app:hintTextColor="#FF0000"
+
+                    >
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/editLoginPasswd"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/lock_icon"
+                        android:text="123123123aa"
+
+                        android:drawablePadding="4dp"
+                        android:inputType="textEmailAddress"
+                        app:counterEnabled="true"
+                        app:counterMaxLength="15"
+                        app:errorEnabled="true" />
+
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+
+        <com.google.android.material.button.MaterialButton
+
+            android:id="@+id/loginBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignStart="@+id/authCenterLoginlayout"
+            android:layout_alignEnd="@+id/authCenterLoginlayout"
+            android:layout_alignBottom="@+id/authCenterLoginlayout"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="-20dp"
+            android:background="@drawable/auth_circle_btn_bg"
+            android:text="Giriş Yap"
+            android:textAllCaps="false"
+            android:textColor="#FFFFFF"
+            android:textSize="@dimen/auth_text_size"
+            app:backgroundTint="@color/primary_color" />
+
+
+    </RelativeLayout>
+
+
+</layout>

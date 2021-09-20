@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape>
+            <corners
+                android:bottomLeftRadius="@dimen/auth_rounded_num"
+                android:bottomRightRadius="@dimen/auth_rounded_num"
+                android:topLeftRadius="@dimen/auth_rounded_num"
+                android:topRightRadius="@dimen/auth_rounded_num" />
+
+            <gradient
+                android:centerY="10"
+                android:type="sweep"
+                android:startColor="#0FFFFFFF"
+                android:endColor="#0FFFFFFF"
+                android:centerColor="#8F8F8F" />
+
+        </shape>
+
+
+    </item>
+
+    <item android:bottom="7dp" android:right="4dp" android:left="4dp">
+
+        <shape>
+            <corners
+                android:bottomLeftRadius="@dimen/auth_rounded_num"
+                android:bottomRightRadius="@dimen/auth_rounded_num"
+                android:topLeftRadius="@dimen/auth_rounded_num"
+                android:topRightRadius="@dimen/auth_rounded_num" />
+            <solid android:color="#FFFFFF" />
+        </shape>
+    </item>
+
+</layer-list>
+
+
+    <!--
+    <item android:bottom="10dp" >
+
+        <shape>
+            <corners
+                android:bottomLeftRadius="@integer/auth_rounded_num"
+                android:bottomRightRadius="@integer/auth_rounded_num"
+                android:topLeftRadius="@integer/auth_rounded_num"
+                android:topRightRadius="@integer/auth_rounded_num" />
+            <solid android:color="#FFFFFF" />
+        </shape>
+    </item>
+-->
+

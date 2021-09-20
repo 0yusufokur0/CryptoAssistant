@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.resurrection.cryptoassistant">
 
+    <uses-permission android:name="android.permission.INTERNET" />
     <application
         android:allowBackup="true"
         android:icon="@drawable/app_icon"
@@ -10,12 +11,17 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.CryptoAssistant">
         <activity
-            android:name=".ui.main.MainActivity"
-            android:exported="true" />
+            android:name=".ui.auth.AuthActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Auth" />
         <activity
-            android:name=".ui.auth.SplashActivity"
-            android:theme="@style/Theme.Splash"
-            android:exported="true">
+            android:name=".ui.main.HomeActivity"
+            android:exported="true"
+            android:theme="@style/Theme.CryptoAssistant" />
+        <activity
+            android:name=".ui.SplashActivity"
+            android:exported="true"
+            android:theme="@style/Theme.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

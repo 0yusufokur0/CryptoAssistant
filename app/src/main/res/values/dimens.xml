@@ -1,0 +1,24 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!-- Auth Integers -->
+    <dimen name="auth_rounded_num">18dp</dimen>
+    <dimen name="auth_text_size">24sp</dimen>
+    <dimen name="auth_area_margin_horizantal">30dp</dimen>
+    <dimen name="auth_area_margin_vertical">30dp</dimen>
+    <dimen name="auth_button_margin">30dp</dimen>
+
+    <!-- General Integers -->
+    <dimen name="edit_text_height">53dp</dimen>
+    <dimen name="edit_text_padding_right">15dp</dimen>
+
+    <!--activity -->
+    <dimen name="main_activity_menu_margin">5dp</dimen>
+
+    <dimen name="menu_fragment_imageview_margin">15dp</dimen>
+    <dimen name="menu_fragment_top_layout_text_size">15sp</dimen>
+
+
+</resources>
