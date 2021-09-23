@@ -1,7 +1,8 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-        id 'com.google.gms.google-services'
+    id 'kotlin-kapt'
+    id 'com.google.gms.google-services'
 }
 
 android {
@@ -39,6 +40,33 @@ android {
 }
 
 dependencies {
+def retrofitVersion = '2.6.0'
+    def rxJavaVersion = '2.1.1'
+
+    implementation "io.reactivex.rxjava2:rxjava:$rxJavaVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$rxJavaVersion"
+
+    implementation 'com.squareup.okhttp3:okhttp:4.7.2'
+
+
+    //retroft
+    implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$retrofitVersion"
+    //recyclerview
+    implementation 'androidx.recyclerview:recyclerview:1.2.1'
+
+
+    //picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
+
+        // viewpager2
+    implementation 'androidx.viewpager2:viewpager2:1.0.0'
+    //tablayout
+    implementation 'com.google.android.material:material:1.4.0'
+
+
     // coroutines
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.2'
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3")

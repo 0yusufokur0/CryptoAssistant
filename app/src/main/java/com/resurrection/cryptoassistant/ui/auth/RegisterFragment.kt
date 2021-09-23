@@ -7,8 +7,7 @@ import com.resurrection.cryptoassistant.databinding.FragmentRegisterBinding
 import com.resurrection.cryptoassistant.ui.base.BaseFragment
 
 class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
-    override val TAG: String
-        get() = RegisterFragment::class.java.simpleName
+
 
 
     override fun getLayoutRes(): Int {

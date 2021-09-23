@@ -11,11 +11,8 @@ import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleObserver
 
-abstract class BaseFragment<VDB : ViewDataBinding> : Fragment(),
-    LifecycleObserver {
+abstract class BaseFragment<VDB : ViewDataBinding> : Fragment(), LifecycleObserver {
     lateinit var binding: VDB
-
-    abstract val TAG: String
 
     @LayoutRes
     abstract fun getLayoutRes(): Int

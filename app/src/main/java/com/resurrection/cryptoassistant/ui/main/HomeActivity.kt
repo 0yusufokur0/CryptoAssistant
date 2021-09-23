@@ -9,28 +9,23 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.resurrection.cryptoassistant.R
 import com.resurrection.cryptoassistant.databinding.ActivityHomeBinding
+import com.resurrection.cryptoassistant.ui.base.BaseActivity
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : BaseActivity<ActivityHomeBinding>() {
 
-    private lateinit var binding: ActivityHomeBinding
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
+    override fun getLayoutRes(): Int { return R.layout.activity_home }
 
-        binding = ActivityHomeBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+    override fun init(savedInstanceState: Bundle?) {
+        setupNavBar()
 
-        val navView: BottomNavigationView = binding.navView
 
+    }
+
+    private fun setupNavBar(){
         val navController = findNavController(R.id.nav_host_fragment_activity_home)
-        // Passing each menu ID as a set of Ids because each
-        // menu should be considered as top level destinations.
-        val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications
-            )
-        )
+        val appBarConfiguration = AppBarConfiguration(setOf(R.id.navigation_market, R.id.navigation_favorite, R.id.navigation_support))
         setupActionBarWithNavController(navController, appBarConfiguration)
-        navView.setupWithNavController(navController)
+        binding.navView.setupWithNavController(navController)
     }
 }

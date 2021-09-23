@@ -2,17 +2,14 @@ package com.resurrection.cryptoassistant.ui.auth
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.core.content.ContextCompat.startActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.resurrection.cryptoassistant.databinding.FragmentLoginBinding
 import com.resurrection.cryptoassistant.ui.base.BaseFragment
 import com.resurrection.cryptoassistant.ui.main.HomeActivity
-import com.resurrection.cryptoassistant.ui.main.MainActivity
 
 
 class LoginFragment : BaseFragment<FragmentLoginBinding>() {
-    override val TAG: String
-        get() = LoginFragment::class.java.simpleName
+
 
 
     override fun getLayoutRes(): Int {

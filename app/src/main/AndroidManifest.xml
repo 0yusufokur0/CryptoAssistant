@@ -15,13 +15,13 @@
             android:exported="true"
             android:theme="@style/Theme.Auth" />
         <activity
-            android:name=".ui.main.HomeActivity"
-            android:exported="true"
-            android:theme="@style/Theme.CryptoAssistant" />
-        <activity
             android:name=".ui.SplashActivity"
             android:exported="true"
-            android:theme="@style/Theme.Splash">
+            android:theme="@style/Theme.Splash" />
+        <activity
+            android:name=".ui.main.HomeActivity"
+            android:exported="true"
+            android:theme="@style/Theme.CryptoAssistant">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

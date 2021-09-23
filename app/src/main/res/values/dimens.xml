@@ -20,5 +20,14 @@
     <dimen name="menu_fragment_imageview_margin">15dp</dimen>
     <dimen name="menu_fragment_top_layout_text_size">15sp</dimen>
 
+    <dimen name="margin_medium">8dp</dimen>
+    <dimen name="size_coin_image">40dp</dimen>
+    <dimen name="margin_min">4dp</dimen>
+    <dimen name="text_size_big">16sp</dimen>
+    <dimen name="height_line_min">1dp</dimen>
+    <dimen name="text_size_min">12sp</dimen>
+    <dimen name="margin_big">16dp</dimen>
+    <dimen name="margin_max">24dp</dimen>
+    <dimen name="margin_profile_item">30dp</dimen>
 
 </resources>

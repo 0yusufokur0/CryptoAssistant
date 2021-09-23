@@ -8,7 +8,6 @@ import com.resurrection.cryptoassistant.R
 import com.resurrection.cryptoassistant.databinding.ActivitySplashBinding
 import com.resurrection.cryptoassistant.ui.auth.AuthActivity
 import com.resurrection.cryptoassistant.ui.base.BaseActivity
-import com.resurrection.cryptoassistant.ui.main.MainActivity
 
 class SplashActivity : BaseActivity<ActivitySplashBinding>(), Animation.AnimationListener {
 
