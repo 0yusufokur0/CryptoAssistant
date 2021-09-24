@@ -35,4 +35,5 @@ class MarketFragment : BaseFragment<FragmentMarketBinding>() {
 
     }
 
+
 }

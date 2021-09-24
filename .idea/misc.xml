@@ -3,23 +3,33 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="../../../../layout/custom_preview.xml" value="0.5988745980707395" />
         <entry key="app/src/main/res/drawable/favorite_24.xml" value="0.3723958333333333" />
+        <entry key="app/src/main/res/drawable/ic_menu_camera.xml" value="0.22552083333333334" />
         <entry key="app/src/main/res/drawable/market24.xml" value="0.3723958333333333" />
         <entry key="app/src/main/res/drawable/rounded_rectangle_area_background.xml" value="0.3723958333333333" />
         <entry key="app/src/main/res/layout/activity_auth.xml" value="0.35625" />
-        <entry key="app/src/main/res/layout/activity_home.xml" value="0.4810606060606061" />
+        <entry key="app/src/main/res/layout/activity_home.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.36354166666666665" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/app_bar_main.xml" value="0.3729166666666667" />
         <entry key="app/src/main/res/layout/bottom_sheet_fragment.xml" value="0.209375" />
+        <entry key="app/src/main/res/layout/content_main.xml" value="0.209375" />
         <entry key="app/src/main/res/layout/crypto_currency_item.xml" value="0.67" />
         <entry key="app/src/main/res/layout/fragment_categories.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/fragment_crypto_currency.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.29030797101449274" />
+        <entry key="app/src/main/res/layout/fragment_favorite.xml" value="0.3729166666666667" />
+        <entry key="app/src/main/res/layout/fragment_gallery.xml" value="0.3729166666666667" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.29030797101449274" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.1984375" />
         <entry key="app/src/main/res/layout/fragment_market.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.29030797101449274" />
+        <entry key="app/src/main/res/layout/fragment_simulator.xml" value="0.3729166666666667" />
+        <entry key="app/src/main/res/layout/fragment_slideshow.xml" value="0.3729166666666667" />
+        <entry key="app/src/main/res/layout/nav_header_main.xml" value="0.3729166666666667" />
         <entry key="app/src/main/res/layout/user_item.xml" value="0.209375" />
+        <entry key="app/src/main/res/menu/activity_main_drawer.xml" value="0.3729166666666667" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.35625" />
       </map>
     </option>
