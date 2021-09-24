@@ -14,6 +14,8 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class CryptoCurrencyFragment : BaseFragment<FragmentCryptoCurrencyBinding>() {
 
+    private var bottomSheet: BottomSheetFragment? = null
+
     private val BASE_URL = "https://api.coingecko.com/api/v3/"
     private var cryptoModels: ArrayList<CryptoMarketModel>? = null
     private var job: Job? = null
@@ -25,6 +27,9 @@ class CryptoCurrencyFragment : BaseFragment<FragmentCryptoCurrencyBinding>() {
     }
 
     override fun init(savedInstanceState: Bundle?) {
+        bottomSheet = BottomSheetFragment(requireContext())
+
+
         loadData()
 
 
@@ -33,6 +38,8 @@ class CryptoCurrencyFragment : BaseFragment<FragmentCryptoCurrencyBinding>() {
 
     fun adaterItemOnClick(asd: CryptoMarketModel) {
         println(asd.name)
+        bottomSheet!!.show(childFragmentManager, "Bottom Sheet")
+
     }
 
 
@@ -61,7 +68,10 @@ class CryptoCurrencyFragment : BaseFragment<FragmentCryptoCurrencyBinding>() {
                     }
                 }
             }
-        }}}
+        }
+    }
+}
+
 
 
 

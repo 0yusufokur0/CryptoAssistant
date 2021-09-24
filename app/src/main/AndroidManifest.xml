@@ -14,6 +14,7 @@
             android:name=".ui.auth.AuthActivity"
             android:exported="true"
             android:theme="@style/Theme.Auth" />
+
         <activity
             android:name=".ui.SplashActivity"
             android:exported="true"
@@ -31,3 +32,16 @@
     </application>
 
 </manifest>
+
+<!--
+<activity
+android:name=".MainActivity"
+android:exported="true"
+    />-->
+
+
+<!--
+<activity
+android:name=".ui.main.HomeActivity"
+android:exported="true"
+android:theme="@style/Theme.CryptoAssistant">-->

@@ -10,6 +10,7 @@
         <entry key="app/src/main/res/layout/activity_home.xml" value="0.4810606060606061" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.36354166666666665" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.33" />
+        <entry key="app/src/main/res/layout/bottom_sheet_fragment.xml" value="0.209375" />
         <entry key="app/src/main/res/layout/crypto_currency_item.xml" value="0.67" />
         <entry key="app/src/main/res/layout/fragment_categories.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/fragment_crypto_currency.xml" value="0.35625" />
@@ -18,6 +19,7 @@
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.1984375" />
         <entry key="app/src/main/res/layout/fragment_market.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/fragment_notifications.xml" value="0.29030797101449274" />
+        <entry key="app/src/main/res/layout/user_item.xml" value="0.209375" />
         <entry key="app/src/main/res/menu/bottom_nav_menu.xml" value="0.35625" />
       </map>
     </option>
