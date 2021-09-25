@@ -23,6 +23,7 @@
             android:name=".ui.main.HomeActivity"
             android:exported="true"
             android:theme="@style/Theme.CryptoAssistant">
+
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

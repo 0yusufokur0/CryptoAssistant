@@ -1,9 +1,9 @@
 package com.resurrection.cryptoassistant.ui.main
 
+import android.content.ClipData
+import android.graphics.Point
+import android.graphics.drawable.Drawable
 import android.os.Bundle
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
@@ -26,6 +26,9 @@ import com.resurrection.navdraver.ui.gallery.GalleryFragment
 
 import com.resurrection.navdraver.ui.home.HomeFragment
 import com.resurrection.navdraver.ui.slideshow.SlideshowFragment
+import android.util.DisplayMetrics
+import android.view.*
+import androidx.core.content.res.ResourcesCompat
 
 
 class HomeActivity : BaseActivity<ActivityHomeBinding>(),NavigationView.OnNavigationItemSelectedListener,BottomNavigationView.OnNavigationItemSelectedListener  {
@@ -37,6 +40,11 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>(),NavigationView.OnNaviga
 
         setupBottomNavBar()
         setupNavDrawer()
+
+
+
+
+
 
     }
 

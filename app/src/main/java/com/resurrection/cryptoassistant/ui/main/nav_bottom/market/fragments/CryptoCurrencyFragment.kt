@@ -1,15 +1,14 @@
-package com.resurrection.cryptoassistant.ui.main.ui.market.fragments
+package com.resurrection.cryptoassistant.ui.main.nav_bottom.market.fragments
 
 import android.os.Bundle
 import com.resurrection.cryptoassistant.R
+import com.resurrection.cryptoassistant.data.model.CoinDetailItem
+import com.resurrection.cryptoassistant.data.remote.RetrofitClient
 import com.resurrection.cryptoassistant.data.model.CryptoMarketModel
-import com.resurrection.cryptoassistant.data.remote.CryptoApiService
 import com.resurrection.cryptoassistant.databinding.FragmentCryptoCurrencyBinding
 import com.resurrection.cryptoassistant.ui.base.BaseFragment
-import com.resurrection.cryptoassistant.ui.main.ui.market.adapters.CryptoMarketAdapter
+import com.resurrection.cryptoassistant.ui.main.nav_bottom.market.adapters.CryptoMarketAdapter
 import kotlinx.coroutines.*
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
 
 
 class CryptoCurrencyFragment : BaseFragment<FragmentCryptoCurrencyBinding>() {
@@ -30,20 +29,32 @@ class CryptoCurrencyFragment : BaseFragment<FragmentCryptoCurrencyBinding>() {
         bottomSheet = BottomSheetFragment(requireContext())
 
 
-        loadData()
+        RetrofitClient(RetrofitClient.api.getData(),this::handleResponse)
 
 
     }
 
 
-    fun adaterItemOnClick(asd: CryptoMarketModel) {
-        println(asd.name)
+    fun handleResponse(asd: Any?) {
+        cryptoModels = ArrayList(asd as List<CryptoMarketModel>)
+
+        cryptoModels?.let {
+            adapter = CryptoMarketAdapter(cryptoModels!!,this::adapterOnCLick)
+            binding.cryptoCurrencyRecyclerView.adapter = adapter
+
+
+    }
+
+           }
+
+    fun adapterOnCLick(cmm :CryptoMarketModel){
+        RetrofitClient(RetrofitClient.api.getCryptoByID(cmm.coinId), {bottomSheet?.fetchData(it as CoinDetailItem)})
         bottomSheet!!.show(childFragmentManager, "Bottom Sheet")
 
+
     }
 
-
-    private fun loadData() {
+/*    private fun loadData() {
 
         val retrofit = Retrofit.Builder()
             .baseUrl(BASE_URL)
@@ -69,7 +80,9 @@ class CryptoCurrencyFragment : BaseFragment<FragmentCryptoCurrencyBinding>() {
                 }
             }
         }
-    }
+    }*/
+
+
 }
 
 

@@ -7,19 +7,19 @@
 
     <fragment
         android:id="@+id/navigation_market"
-        android:name="com.resurrection.cryptoassistant.ui.main.ui.market.MarketFragment"
+        android:name="com.resurrection.cryptoassistant.ui.main.nav_bottom.market.MarketFragment"
         android:label="@string/title_home"
         tools:layout="@layout/fragment_market" />
 
     <fragment
         android:id="@+id/navigation_favorite"
-        android:name="com.resurrection.cryptoassistant.ui.main.ui.favorite.FavoriteFragment"
+        android:name="com.resurrection.cryptoassistant.ui.main.nav_bottom.favorite.FavoriteFragment"
         android:label="@string/title_dashboard"
         tools:layout="@layout/fragment_favorite" />
 
     <fragment
         android:id="@+id/navigation_support"
-        android:name="com.resurrection.cryptoassistant.ui.main.ui.support.SupportFragment"
+        android:name="com.resurrection.cryptoassistant.ui.main.nav_bottom.support.SupportFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_support" />
 </navigation>

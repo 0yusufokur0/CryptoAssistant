@@ -1,4 +1,4 @@
-package com.resurrection.cryptoassistant.ui.main.ui.favorite
+package com.resurrection.cryptoassistant.ui.main.nav_bottom.favorite
 
 import android.os.Bundle
 import com.resurrection.cryptoassistant.R

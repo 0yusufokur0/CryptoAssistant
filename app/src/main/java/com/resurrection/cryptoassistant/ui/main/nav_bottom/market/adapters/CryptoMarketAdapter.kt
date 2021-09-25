@@ -1,4 +1,4 @@
-package com.resurrection.cryptoassistant.ui.main.ui.market.adapters
+package com.resurrection.cryptoassistant.ui.main.nav_bottom.market.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

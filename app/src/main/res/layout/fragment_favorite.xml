@@ -6,7 +6,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.ui.favorite.FavoriteFragment">
+    tools:context=".ui.main.nav_bottom.favorite.FavoriteFragment">
 
     <TextView
         android:id="@+id/text_dashboard"

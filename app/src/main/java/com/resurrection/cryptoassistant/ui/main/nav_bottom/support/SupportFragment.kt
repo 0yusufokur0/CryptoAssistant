@@ -1,4 +1,4 @@
-package com.resurrection.cryptoassistant.ui.main.ui.support
+package com.resurrection.cryptoassistant.ui.main.nav_bottom.support
 
 import android.os.Bundle
 import com.resurrection.cryptoassistant.R
