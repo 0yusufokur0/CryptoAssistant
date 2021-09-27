@@ -1,11 +1,11 @@
-package com.resurrection.cryptoassistant.ui.main.nav_bottom.market
+package com.resurrection.cryptoassistant.ui.main.market
 
 import android.os.Bundle
 import com.google.android.material.tabs.TabLayoutMediator
 import com.resurrection.cryptoassistant.R
 import com.resurrection.cryptoassistant.databinding.FragmentMarketBinding
 import com.resurrection.cryptoassistant.ui.base.BaseFragment
-import com.resurrection.cryptoassistant.ui.main.nav_bottom.market.adapters.ViewPagerAdapter
+import com.resurrection.cryptoassistant.ui.main.market.adapters.ViewPagerAdapter
 
 class MarketFragment : BaseFragment<FragmentMarketBinding>() {
 

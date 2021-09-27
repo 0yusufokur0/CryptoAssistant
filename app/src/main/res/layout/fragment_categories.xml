@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#C10000"
-    tools:context=".ui.main.nav_bottom.market.fragments.CategoriesFragment">
+    tools:context=".ui.main.market.fragments.CategoriesFragment">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView

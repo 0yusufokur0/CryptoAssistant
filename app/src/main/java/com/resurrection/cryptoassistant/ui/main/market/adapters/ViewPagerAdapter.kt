@@ -1,12 +1,12 @@
-package com.resurrection.cryptoassistant.ui.main.nav_bottom.market.adapters
+package com.resurrection.cryptoassistant.ui.main.market.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.resurrection.cryptoassistant.ui.main.nav_bottom.market.fragments.CategoriesFragment
-import com.resurrection.cryptoassistant.ui.main.nav_bottom.market.fragments.CryptoCurrencyFragment
-import com.resurrection.cryptoassistant.ui.main.nav_bottom.market.fragments.SimulatorFragment
+import com.resurrection.cryptoassistant.ui.main.market.fragments.CategoriesFragment
+import com.resurrection.cryptoassistant.ui.main.market.fragments.CryptoCurrencyFragment
+import com.resurrection.cryptoassistant.ui.main.market.fragments.SimulatorFragment
 
 class ViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle): FragmentStateAdapter(fragmentManager, lifecycle) {
     override fun getItemCount(): Int {

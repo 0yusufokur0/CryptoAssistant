@@ -1,4 +1,4 @@
-package com.resurrection.cryptoassistant.ui.main.nav_bottom.market.fragments
+package com.resurrection.cryptoassistant.ui.main.market.fragments
 
 import android.os.Bundle
 import com.resurrection.cryptoassistant.R
@@ -7,7 +7,7 @@ import com.resurrection.cryptoassistant.data.remote.RetrofitClient
 import com.resurrection.cryptoassistant.data.model.CryptoMarketModel
 import com.resurrection.cryptoassistant.databinding.FragmentCryptoCurrencyBinding
 import com.resurrection.cryptoassistant.ui.base.BaseFragment
-import com.resurrection.cryptoassistant.ui.main.nav_bottom.market.adapters.CryptoMarketAdapter
+import com.resurrection.cryptoassistant.ui.main.market.adapters.CryptoMarketAdapter
 import kotlinx.coroutines.*
 
 

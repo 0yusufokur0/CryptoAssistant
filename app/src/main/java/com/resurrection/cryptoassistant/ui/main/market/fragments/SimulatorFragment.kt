@@ -1,4 +1,4 @@
-package com.resurrection.cryptoassistant.ui.main.nav_bottom.market.fragments
+package com.resurrection.cryptoassistant.ui.main.market.fragments
 
 import androidx.fragment.app.Fragment
 
