@@ -10,23 +10,17 @@ import com.resurrection.cryptoassistant.ui.main.HomeActivity
 
 class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
-
-
     override fun getLayoutRes(): Int {
         return com.resurrection.cryptoassistant.R.layout.fragment_login
     }
 
     override fun init(savedInstanceState: Bundle?) {
-
-
-
         binding.loginBtn.setOnClickListener {
             FirebaseAuth.getInstance().signInWithEmailAndPassword(
                 binding.editLoginEmail.editableText.toString(),
                 binding.editLoginPasswd.editableText.toString()
             ).addOnSuccessListener {
                 startActivity(Intent(activity, HomeActivity::class.java))
-                println("giriş yapıldı")
 
             }.addOnFailureListener {
 

@@ -12,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.LifecycleObserver
 
 abstract class BaseFragment<VDB : ViewDataBinding> : Fragment(), LifecycleObserver {
+
     lateinit var binding: VDB
 
     @LayoutRes
@@ -34,8 +35,6 @@ abstract class BaseFragment<VDB : ViewDataBinding> : Fragment(), LifecycleObserv
         super.onViewCreated(view, savedInstanceState)
         init(savedInstanceState)
     }
-
-
 
 
 }

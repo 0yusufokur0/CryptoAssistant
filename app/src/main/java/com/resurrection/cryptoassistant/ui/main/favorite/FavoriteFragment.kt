@@ -9,13 +9,11 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
 
-
     override fun getLayoutRes(): Int {
         return R.layout.fragment_favorite
     }
 
     override fun init(savedInstanceState: Bundle?) {
-
 
     }
 

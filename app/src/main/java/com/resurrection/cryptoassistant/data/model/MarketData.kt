@@ -1,6 +1,9 @@
 package com.aokur.bitcointicker.data.model
 
 import com.google.gson.annotations.SerializedName
+import com.resurrection.cryptoassistant.data.model.CurrentPrice
+import com.resurrection.cryptoassistant.data.model.High24h
+import com.resurrection.cryptoassistant.data.model.Low24h
 
 data class MarketData(
     @SerializedName("current_price")

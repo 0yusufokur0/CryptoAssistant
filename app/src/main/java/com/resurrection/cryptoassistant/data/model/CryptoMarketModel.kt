@@ -1,12 +1,11 @@
 package com.resurrection.cryptoassistant.data.model
 
-import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 
 
 data class CryptoMarketModel(
     @SerializedName("id")
-    val coinId: String,
+    val cryptoId: String,
 
     @SerializedName("current_price")
     val currentPrice: Double,

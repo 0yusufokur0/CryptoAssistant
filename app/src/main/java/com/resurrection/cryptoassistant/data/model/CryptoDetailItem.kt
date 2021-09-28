@@ -1,11 +1,9 @@
 package com.resurrection.cryptoassistant.data.model
 
-import com.aokur.bitcointicker.data.model.Description
-import com.aokur.bitcointicker.data.model.Image
 import com.aokur.bitcointicker.data.model.MarketData
 import com.google.gson.annotations.SerializedName
 
-data class CoinDetailItem(
+data class CryptoDetailItem(
     @SerializedName("id")
     val id: String,
 

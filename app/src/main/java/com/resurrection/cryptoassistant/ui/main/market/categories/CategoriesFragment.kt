@@ -18,5 +18,4 @@ class CategoriesFragment : BaseFragment<FragmentCategoriesBinding>() {
     }
 
 
-
 }

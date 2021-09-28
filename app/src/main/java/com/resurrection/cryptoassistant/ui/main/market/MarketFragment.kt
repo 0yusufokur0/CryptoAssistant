@@ -10,7 +10,6 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MarketFragment : BaseFragment<FragmentMarketBinding>() {
 
-
     override fun getLayoutRes(): Int {
         return R.layout.fragment_market
     }

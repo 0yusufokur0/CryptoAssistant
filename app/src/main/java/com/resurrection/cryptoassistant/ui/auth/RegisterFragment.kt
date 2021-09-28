@@ -7,17 +7,12 @@ import com.resurrection.cryptoassistant.databinding.FragmentRegisterBinding
 import com.resurrection.cryptoassistant.ui.base.BaseFragment
 
 class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
-
-
-
     override fun getLayoutRes(): Int {
         return R.layout.fragment_register
     }
 
     override fun init(savedInstanceState: Bundle?) {
-
         binding.loginBtn.setOnClickListener {
-            println("aaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
             FirebaseAuth.getInstance().createUserWithEmailAndPassword(
                 binding.editLoginEmail.editableText.toString(),
                 binding.editLoginPasswd.editableText.toString()
@@ -27,10 +22,8 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
                 }.addOnFailureListener {
 
                 }
-
         }
 
     }
-
 
 }

@@ -18,12 +18,10 @@ import dagger.hilt.android.AndroidEntryPoint
 class CryptoCurrencyFragment : BaseFragment<FragmentCryptoCurrencyBinding>() {
 
     private var bottomSheet: BottomSheetFragment? = null
-
     private val BASE_URL = "https://api.coingecko.com/api/v3/"
     private var cryptoModels: ArrayList<CryptoMarketModel>? = null
     private var job: Job? = null
     private var adapter: CryptoCurrencyAdapter? = null
-
     val viewModel1: CryptoCurrencyViewModel by viewModels()
 
     override fun getLayoutRes(): Int {
@@ -40,12 +38,7 @@ class CryptoCurrencyFragment : BaseFragment<FragmentCryptoCurrencyBinding>() {
         println("asdasdasdasdasd")
 
     }
-
-
         })
-
-
-
 
     }
 
@@ -56,10 +49,7 @@ class CryptoCurrencyFragment : BaseFragment<FragmentCryptoCurrencyBinding>() {
         cryptoModels?.let {
             adapter = CryptoCurrencyAdapter(cryptoModels!!,this::adapterOnCLick)
             binding.cryptoCurrencyRecyclerView.adapter = adapter
-
-
     }
-
            }
 
     fun adapterOnCLick(cmm :CryptoMarketModel){

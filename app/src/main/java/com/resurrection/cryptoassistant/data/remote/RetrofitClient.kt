@@ -14,7 +14,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 
 class RetrofitClient(
     var anyObservable: Observable<*>, function: (Any?) -> Unit) {
-    var compositeDisposable: CompositeDisposable
+    var compositeDisposable: CompositeDisposable = CompositeDisposable()
     lateinit var data:Any
     companion object {
         val api: CryptoApiService
@@ -31,7 +31,6 @@ class RetrofitClient(
     }
 
     init {
-        compositeDisposable = CompositeDisposable()
         compositeDisposable.add(
             anyObservable
                 .subscribeOn(Schedulers.io())

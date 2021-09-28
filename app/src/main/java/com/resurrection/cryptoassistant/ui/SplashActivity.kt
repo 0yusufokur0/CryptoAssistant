@@ -22,12 +22,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(), Animation.Animatio
         animationImageView.setAnimationListener(this)
         binding.splashTextView.startAnimation(animationImageView)
 
-
-
-
-
     }
-
 
     override fun onAnimationStart(p0: Animation?) {}
 

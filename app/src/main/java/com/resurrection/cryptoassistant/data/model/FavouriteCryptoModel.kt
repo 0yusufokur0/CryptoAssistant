@@ -1,6 +1,6 @@
-package com.aokur.bitcointicker.data.model
+package com.resurrection.cryptoassistant.data.model
 
-data class FavouriteCoinModel(
+data class FavouriteCryptoModel(
     val id: String,
     val image: String,
     val name: String,

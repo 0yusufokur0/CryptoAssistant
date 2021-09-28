@@ -12,8 +12,6 @@ class SupportFragment : BaseFragment<FragmentSupportBinding>() {
     }
 
     override fun init(savedInstanceState: Bundle?) {
-
-
     }
 
 }
