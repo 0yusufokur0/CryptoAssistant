@@ -9,7 +9,11 @@
         android:id="@+id/navigation_market"
         android:name="com.resurrection.cryptoassistant.ui.main.market.MarketFragment"
         android:label="@string/title_home"
-        tools:layout="@layout/fragment_market" />
+        tools:layout="@layout/fragment_market" >
+        <action
+            android:id="@+id/action_navigation_market_to_bottomSheetFragment"
+            app:destination="@id/bottomSheetFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/navigation_favorite"
@@ -22,4 +26,25 @@
         android:name="com.resurrection.cryptoassistant.ui.main.support.SupportFragment"
         android:label="@string/title_notifications"
         tools:layout="@layout/fragment_support" />
+
+
+<!--    <dialog
+        android:id="@+id/bottomSheetFragment"
+        android:name="com.resurrection.cryptoassistant.ui.main.market.details.BottomSheetFragment"
+        android:label="BottomSheetFragment" >
+        <argument
+            android:name="cryptoId"
+            app:argType="string"
+            android:defaultValue="not" />
+    </dialog>-->
+
+    <fragment
+        android:id="@+id/bottomSheetFragment"
+        android:name="com.resurrection.cryptoassistant.ui.main.market.details.CryptoDetailFragment"
+        android:label="BottomSheetFragment"
+        tools:layout="@layout/bottom_sheet_fragment">
+        <argument
+            android:name="coinId"
+            app:argType="string" />
+    </fragment>
 </navigation>

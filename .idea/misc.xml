@@ -5,7 +5,9 @@
       <map>
         <entry key="../../../../layout/custom_preview.xml" value="0.5988745980707395" />
         <entry key="app/src/main/res/drawable-v24/bottom_sheet_bg.xml" value="0.3890625" />
+        <entry key="app/src/main/res/drawable-v24/coin_price_up_bg.xml" value="0.3890625" />
         <entry key="app/src/main/res/drawable-v24/ic_round_star_24.xml" value="0.3890625" />
+        <entry key="app/src/main/res/drawable-v24/ic_timelapse.xml" value="0.3890625" />
         <entry key="app/src/main/res/drawable/circle.xml" value="0.3890625" />
         <entry key="app/src/main/res/drawable/favorite_24.xml" value="0.3723958333333333" />
         <entry key="app/src/main/res/drawable/ic_menu_camera.xml" value="0.22552083333333334" />
@@ -16,7 +18,7 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.36354166666666665" />
         <entry key="app/src/main/res/layout/activity_splash.xml" value="0.33" />
         <entry key="app/src/main/res/layout/app_bar_main.xml" value="0.3729166666666667" />
-        <entry key="app/src/main/res/layout/bottom_sheet_fragment.xml" value="0.5" />
+        <entry key="app/src/main/res/layout/bottom_sheet_fragment.xml" value="0.5254901960784314" />
         <entry key="app/src/main/res/layout/content_main.xml" value="0.209375" />
         <entry key="app/src/main/res/layout/crypto_currency_item.xml" value="0.67" />
         <entry key="app/src/main/res/layout/fragment_categories.xml" value="0.35625" />

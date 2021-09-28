@@ -7,36 +7,32 @@ import com.resurrection.cryptoassistant.R
 import com.resurrection.cryptoassistant.data.model.CryptoMarketModel
 import com.resurrection.cryptoassistant.databinding.FragmentCryptoCurrencyBinding
 import com.resurrection.cryptoassistant.ui.base.BaseFragment
-import com.resurrection.cryptoassistant.ui.main.market.details.BottomSheetFragment
+import com.resurrection.cryptoassistant.ui.main.market.details.CryptoDetailFragment
 import kotlinx.coroutines.*
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.ViewModelProviders
-import com.resurrection.cryptoassistant.data.remote.CryptoApiService
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class CryptoCurrencyFragment : BaseFragment<FragmentCryptoCurrencyBinding>() {
 
-    private var bottomSheet: BottomSheetFragment? = null
+    private var cryptoDetail: CryptoDetailFragment? = null
     private val BASE_URL = "https://api.coingecko.com/api/v3/"
     private var cryptoModels: ArrayList<CryptoMarketModel>? = null
     private var job: Job? = null
     private var adapter: CryptoCurrencyAdapter? = null
-    val viewModel1: CryptoCurrencyViewModel by viewModels()
+    val viewModel: CryptoCurrencyViewModel by viewModels()
 
     override fun getLayoutRes(): Int {
         return R.layout.fragment_crypto_currency
     }
 
     override fun init(savedInstanceState: Bundle?) {
-        bottomSheet = BottomSheetFragment(requireContext())
-        viewModel1.getAllCrypto()
-        viewModel1.allCrypto.observe(viewLifecycleOwner, Observer {
+        cryptoDetail = CryptoDetailFragment(requireContext())
+        viewModel.getAllCrypto()
+        viewModel.allCrypto.observe(viewLifecycleOwner, Observer {
                      it?.let {
             adapter = CryptoCurrencyAdapter(it as ArrayList<CryptoMarketModel>,this::adapterOnCLick)
             binding.cryptoCurrencyRecyclerView.adapter = adapter
-        println("asdasdasdasdasd")
-
+            println(it.get(0).cryptoImage.toString())
     }
         })
 
@@ -53,7 +49,12 @@ class CryptoCurrencyFragment : BaseFragment<FragmentCryptoCurrencyBinding>() {
            }
 
     fun adapterOnCLick(cmm :CryptoMarketModel){
-    bottomSheet!!.show(childFragmentManager, "Bottom Sheet")
+
+        val bundle = Bundle()
+        bundle.putString("cryptoId", cmm.cryptoId.toString())
+        cryptoDetail!!.arguments = bundle
+
+        cryptoDetail!!.show(childFragmentManager, "Bottom Sheet")
 
     }
 

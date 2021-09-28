@@ -28,8 +28,12 @@ class CryptoCurrencyAdapter(cryptoList:ArrayList<CryptoMarketModel>, coinOnClick
 
     class Holder(private var binding:CryptoCurrencyItemBinding, private val itemOnClick: (CryptoMarketModel) -> Unit) : RecyclerView.ViewHolder(binding.root) {
         fun bind(cryptoMarketModel : CryptoMarketModel){
-            binding.txtCoinName.text = cryptoMarketModel.name
-            Picasso.get().load(cryptoMarketModel.cryptoImage).into(binding.imgCoin)
+       /*     binding.txtCoinName.text = cryptoMarketModel.name
+            Picasso.get().load(cryptoMarketModel.cryptoImage).into(binding.imgCoin)*/
+
+            binding.crypto =cryptoMarketModel
+
+
             itemView.setOnClickListener {
                 itemOnClick(cryptoMarketModel)
             }

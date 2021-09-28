@@ -22,4 +22,15 @@
     <color name="primary_dark_color">#3D3D3D</color>
     <color name="window_background">#F5F5F5</color>
 
+
+    <color name="gray">#DFDFDF</color>
+    <color name="red">#F44336</color>
+    <color name="green">#4CAF50</color>
+    <color name="light_green">#47DDB9</color>
+    <color name="light_red">#FF7373</color>
+    <color name="yellow">#FFFF00</color>
+
+    <color name="head_text_color">#000000</color>
+    <color name="content_text_color">#232323</color>
+
 </resources>

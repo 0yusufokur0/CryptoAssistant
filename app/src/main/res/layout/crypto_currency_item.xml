@@ -2,7 +2,11 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
-
+    <data>
+        <variable
+            name="crypto"
+            type="com.resurrection.cryptoassistant.data.model.CryptoMarketModel" />
+    </data>
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -27,6 +31,7 @@
                 android:id="@+id/imgCoin"
                 android:layout_width="40dp"
                 android:layout_height="40dp"
+                loadImageFromUrl="@{crypto.cryptoImage}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -39,6 +44,7 @@
                 android:layout_marginEnd="@dimen/margin_medium"
                 android:paddingTop="@dimen/margin_min"
                 android:textSize="@dimen/text_size_big"
+                android:text="@{crypto.name}"
                 app:fontFamily="@font/quicksand_bold"
                 app:layout_constraintBottom_toTopOf="@id/txtCoinSymbol"
                 app:layout_constraintStart_toEndOf="@id/imgCoin"
@@ -54,6 +60,7 @@
                 android:layout_marginTop="@dimen/margin_min"
                 android:layout_marginEnd="@dimen/margin_medium"
                 android:textSize="@dimen/text_size_min"
+                android:text="@{crypto.symbol.toString()}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@id/imgCoin"
                 app:layout_constraintTop_toBottomOf="@id/txtCoinName"
@@ -61,6 +68,7 @@
 
             <com.google.android.material.textview.MaterialTextView
                 android:id="@+id/txtCoinCurrentPrice"
+                setCoinPriceBackground="@{crypto.priceChange24h}"
                 android:layout_width="110dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/margin_medium"
@@ -69,12 +77,12 @@
                 android:maxWidth="110dp"
                 android:paddingTop="@dimen/margin_min"
                 android:paddingBottom="@dimen/margin_min"
+                android:text="@{`$` + Double.toString(crypto.currentPrice)}"
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/txtCoinPriceChange"
                 tools:text="Coin Price"
                 app:layout_constraintVertical_chainStyle="packed"/>
 
@@ -86,6 +94,7 @@
                 android:layout_marginStart="@dimen/margin_medium"
                 android:layout_marginTop="@dimen/margin_min"
                 android:layout_marginEnd="@dimen/margin_medium"
+                android:text="@{Double.toString(crypto.priceChangePercentage24h) + `%`}"
                 android:textSize="@dimen/text_size_min"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintVertical_chainStyle="packed"
@@ -96,6 +105,7 @@
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imgChangeArrow"
+                setArrowBackground="@{crypto.priceChangePercentage24h}"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/margin_min"
