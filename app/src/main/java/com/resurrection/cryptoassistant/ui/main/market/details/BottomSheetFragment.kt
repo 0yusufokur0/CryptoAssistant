@@ -1,4 +1,4 @@
-package com.resurrection.cryptoassistant.ui.main.market.fragments
+package com.resurrection.cryptoassistant.ui.main.market.details
 
 import android.content.Context
 import android.os.Bundle
@@ -7,8 +7,9 @@ import com.resurrection.cryptoassistant.R
 import com.resurrection.cryptoassistant.data.model.CoinDetailItem
 import com.resurrection.cryptoassistant.databinding.BottomSheetFragmentBinding
 import com.resurrection.cryptoassistant.ui.base.BaseBottomSheetFragment
+import dagger.hilt.android.AndroidEntryPoint
 
-//TODO: Bottom shhet için base class yazılacak
+@AndroidEntryPoint
 class BottomSheetFragment(private val mContext: Context) :
     BaseBottomSheetFragment<BottomSheetFragmentBinding>() {
     var coinDetailItem: CoinDetailItem? = null

@@ -1,8 +1,11 @@
 package com.resurrection.cryptoassistant.data.remote
 
+import androidx.lifecycle.MutableLiveData
 import io.reactivex.disposables.CompositeDisposable
 import com.google.gson.GsonBuilder
+import com.resurrection.cryptoassistant.data.model.CryptoMarketModel
 import io.reactivex.Observable
+import io.reactivex.Observer
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
@@ -12,7 +15,7 @@ import io.reactivex.android.schedulers.AndroidSchedulers
 class RetrofitClient(
     var anyObservable: Observable<*>, function: (Any?) -> Unit) {
     var compositeDisposable: CompositeDisposable
-
+    lateinit var data:Any
     companion object {
         val api: CryptoApiService
             get() {
@@ -24,6 +27,7 @@ class RetrofitClient(
                     .build()
                 return retrofit.create(CryptoApiService::class.java)
             }
+
     }
 
     init {
@@ -33,11 +37,17 @@ class RetrofitClient(
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .doOnError(::print)
-                .subscribe { any -> function.invoke(any as Any?) })
+                .subscribe { any -> function(any)})
+
     }
+
+
     fun returnCompose(): CompositeDisposable {
         return compositeDisposable
     }
+
+
+
 }
 
 

@@ -8,7 +8,9 @@ import com.resurrection.cryptoassistant.R
 import com.resurrection.cryptoassistant.databinding.ActivitySplashBinding
 import com.resurrection.cryptoassistant.ui.auth.AuthActivity
 import com.resurrection.cryptoassistant.ui.base.BaseActivity
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SplashActivity : BaseActivity<ActivitySplashBinding>(), Animation.AnimationListener {
 
     lateinit var animationImageView: Animation

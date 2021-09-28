@@ -1,23 +1,20 @@
-package com.resurrection.cryptoassistant.ui.main.favorite
+package com.resurrection.cryptoassistant.ui.main.market.simulator
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import com.resurrection.cryptoassistant.R
-import com.resurrection.cryptoassistant.databinding.FragmentFavoriteBinding
+import com.resurrection.cryptoassistant.databinding.FragmentSimulatorBinding
 import com.resurrection.cryptoassistant.ui.base.BaseFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
-
-
+class SimulatorFragment : BaseFragment<FragmentSimulatorBinding>() {
     override fun getLayoutRes(): Int {
-        return R.layout.fragment_favorite
+        return R.layout.fragment_simulator
     }
 
     override fun init(savedInstanceState: Bundle?) {
 
-
     }
-
 
 }

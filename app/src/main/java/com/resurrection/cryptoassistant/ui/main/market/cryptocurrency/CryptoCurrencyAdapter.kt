@@ -1,4 +1,4 @@
-package com.resurrection.cryptoassistant.ui.main.market.adapters
+package com.resurrection.cryptoassistant.ui.main.market.cryptocurrency
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -7,7 +7,7 @@ import com.resurrection.cryptoassistant.data.model.CryptoMarketModel
 import com.resurrection.cryptoassistant.databinding.CryptoCurrencyItemBinding
 import com.squareup.picasso.Picasso
 
-class CryptoMarketAdapter(cryptoList:ArrayList<CryptoMarketModel>, coinOnClick: (CryptoMarketModel) -> Unit) : RecyclerView.Adapter<CryptoMarketAdapter.Holder>() {
+class CryptoCurrencyAdapter(cryptoList:ArrayList<CryptoMarketModel>, coinOnClick: (CryptoMarketModel) -> Unit) : RecyclerView.Adapter<CryptoCurrencyAdapter.Holder>() {
     var cryptoMarketModels = cryptoList
 
     private var coinOnClick = coinOnClick

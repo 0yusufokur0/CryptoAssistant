@@ -16,8 +16,9 @@ import com.google.android.material.navigation.NavigationView
 import com.resurrection.cryptoassistant.R
 import com.resurrection.cryptoassistant.databinding.ActivityHomeBinding
 import com.resurrection.cryptoassistant.ui.base.BaseActivity
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class HomeActivity : BaseActivity<ActivityHomeBinding>()  {
     private lateinit var appBarConfiguration: AppBarConfiguration
 

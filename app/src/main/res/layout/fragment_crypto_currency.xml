@@ -5,7 +5,7 @@
 <RelativeLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.main.market.fragments.CryptoCurrencyFragment">
+    tools:context=".ui.main.market.cryptocurrency.CryptoCurrencyFragment">
 <androidx.recyclerview.widget.RecyclerView
     android:id="@+id/cryptoCurrencyRecyclerView"
     android:layout_width="match_parent"

@@ -11,7 +11,7 @@ import retrofit2.http.Path
 interface CryptoApiService {
 
     @GET("coins/markets?vs_currency=usd")
-     fun getData(): Observable<List<CryptoMarketModel>>
+     fun getAllCrypto(): Observable<List<CryptoMarketModel>>
 
     @GET("coins/{id}")
     fun getCryptoByID(@Path("id") id: String): Observable<CoinDetailItem>

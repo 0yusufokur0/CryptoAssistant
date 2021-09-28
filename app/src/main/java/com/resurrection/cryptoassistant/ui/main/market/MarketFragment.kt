@@ -5,8 +5,9 @@ import com.google.android.material.tabs.TabLayoutMediator
 import com.resurrection.cryptoassistant.R
 import com.resurrection.cryptoassistant.databinding.FragmentMarketBinding
 import com.resurrection.cryptoassistant.ui.base.BaseFragment
-import com.resurrection.cryptoassistant.ui.main.market.adapters.ViewPagerAdapter
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MarketFragment : BaseFragment<FragmentMarketBinding>() {
 
 

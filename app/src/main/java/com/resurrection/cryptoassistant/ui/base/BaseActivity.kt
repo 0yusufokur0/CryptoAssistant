@@ -6,6 +6,7 @@ import androidx.annotation.LayoutRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
+import com.resurrection.cryptoassistant.App
 import com.resurrection.cryptoassistant.databinding.ActivitySplashBinding
 
 abstract class BaseActivity<viewDataBinding : ViewDataBinding> : AppCompatActivity() {
@@ -24,7 +25,9 @@ abstract class BaseActivity<viewDataBinding : ViewDataBinding> : AppCompatActivi
         init(savedInstanceState)
     }
 
-
+ fun getApp(): App {
+        return application as App
+    }
 
 
 }
