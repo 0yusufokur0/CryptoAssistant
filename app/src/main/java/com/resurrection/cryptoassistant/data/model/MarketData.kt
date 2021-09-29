@@ -1,4 +1,4 @@
-package com.aokur.bitcointicker.data.model
+package com.resurrection.cryptoassistant.data.model
 
 import com.google.gson.annotations.SerializedName
 import com.resurrection.cryptoassistant.data.model.CurrentPrice

@@ -1,5 +1,22 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 buildscript {
+    ext {
+        kotlin_version = "1.4.3"
+        coroutines_version = "1.4.2"
+        livedata_version = "2.2.0"
+        hilt_version = "2.33-beta"
+        lifecycle_livedata_version = "2.3.1"
+        lifecycle_viewmodel_version = "2.3.1"
+        room_version = "2.3.0"
+        navigationVersion = "2.3.5"
+        navSafeArgsVersion = "2.3.5"
+        coil_version = "1.1.1"
+        firebaseui_version = "6.4.0"
+        firebase_analytics_version = "18.0.3"
+        firebase_auth_version = "20.0.4"
+        firestore_version = "22.1.2"
+        firebasebom_version = "27.0.0"
+    }
     repositories {
         google()
         mavenCentral()

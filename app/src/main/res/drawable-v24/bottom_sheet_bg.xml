@@ -11,7 +11,7 @@
                 android:bottomRightRadius="@dimen/auth_rounded_num"
                 android:topLeftRadius="@dimen/auth_rounded_num"
                 android:topRightRadius="@dimen/auth_rounded_num" />
-            <solid android:color="#FFFFFF" />
+            <solid android:color="?attr/bottomSheetBg" />
         </shape>
     </item>
 

@@ -1,9 +1,12 @@
 package com.resurrection.cryptoassistant.data.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
-
+@Entity(tableName = "crypto_market_model")
 data class CryptoMarketModel(
+    @PrimaryKey
     @SerializedName("id")
     val cryptoId: String,
 

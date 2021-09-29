@@ -32,5 +32,7 @@
 
     <color name="head_text_color">#000000</color>
     <color name="content_text_color">#232323</color>
+    <color name="bottomSheetDarkBg">#000000</color>
+    <color name="bottomSheetLightBg">#FFFFFF</color>
 
 </resources>

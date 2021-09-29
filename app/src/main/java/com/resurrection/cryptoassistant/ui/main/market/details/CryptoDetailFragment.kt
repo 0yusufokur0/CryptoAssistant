@@ -1,6 +1,7 @@
 package com.resurrection.cryptoassistant.ui.main.market.details
 
 import android.content.Context
+import android.graphics.Color
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
@@ -28,14 +29,24 @@ class CryptoDetailFragment(private val mContext: Context) :
         binding.progressbar.visibility = View.VISIBLE
 
         viewModel.getCryptoById(data.toString())
-        viewModel.crypto.observe(viewLifecycleOwner, Observer {
+        viewModel.cryptoDetail.observe(viewLifecycleOwner, Observer {
+            binding.cryptoDetail = null
             binding.cryptoDetail = it
             println(it.image.small.toString())
             Glide.with(requireContext()).load(it.image.large).into(binding.imgIconImage)
             binding.progressbar.visibility = View.INVISIBLE
-
+            binding.favoriteImageView.setBackgroundColor(Color.RED)
         })
-     }
+
+
+        binding.favoriteImageView.setOnClickListener {
+            viewModel.insertFavorite(binding.cryptoDetail as CryptoDetailItem)
+
+        }
+
+
+
+    }
 
 
 

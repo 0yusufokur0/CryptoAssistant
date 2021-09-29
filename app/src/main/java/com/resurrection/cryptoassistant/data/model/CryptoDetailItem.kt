@@ -1,9 +1,12 @@
 package com.resurrection.cryptoassistant.data.model
 
-import com.aokur.bitcointicker.data.model.MarketData
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+@Entity(tableName = "crypto_favorite")
 data class CryptoDetailItem(
+    @PrimaryKey
     @SerializedName("id")
     val id: String,
 
