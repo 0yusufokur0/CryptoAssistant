@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.resurrection.cryptoassistant.data.db.CryptoDatabase
 import com.resurrection.cryptoassistant.data.model.CryptoDetailItem
+import com.resurrection.cryptoassistant.data.model.CryptoMarketModel
 import com.resurrection.cryptoassistant.data.remote.RetrofitClient
 import com.resurrection.cryptoassistant.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -20,8 +21,8 @@ class CryptoDetailViewModel @Inject constructor(application: Application) :
     var disposable: CompositeDisposable? = null
     val dao = CryptoDatabase(getApplication()).cryptoDao()
 
-    fun getCryptoById(id:String) {
-        disposable = RetrofitClient(RetrofitClient.api.getCryptoByID(id), this::setVal).returnCompose()
+    fun getCryptoDetailById(id:String) {
+        disposable = RetrofitClient(RetrofitClient.api.getCryptoById(id), this::setVal).returnCompose()
 
     }
 
@@ -29,11 +30,14 @@ class CryptoDetailViewModel @Inject constructor(application: Application) :
         cryptoDetail.value = any as CryptoDetailItem
     }
 
-    fun insertFavorite(cryptoDetailItem: CryptoDetailItem) = viewModelScope.launch{
-            dao.insertFavoriteCrypto(cryptoDetailItem)
+/*    fun insertFavorite(favouriteCryptoModel: FavouriteCryptoModel) = viewModelScope.launch{
+            dao.insertFavoriteCrypto(favouriteCryptoModel)
+    }*/
+
+    fun insertFavoriteCrypto(cmm: CryptoMarketModel)= viewModelScope.launch{
+        dao.insertFavoriteCrypto(cmm)
+
     }
-
-
 
 
 

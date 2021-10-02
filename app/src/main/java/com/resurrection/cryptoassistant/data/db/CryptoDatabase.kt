@@ -9,8 +9,9 @@ import com.resurrection.cryptoassistant.DataConverter
 import com.resurrection.cryptoassistant.data.db.dao.CryptoDao
 import com.resurrection.cryptoassistant.data.model.CryptoDetailItem
 import com.resurrection.cryptoassistant.data.model.CryptoMarketModel
+import com.resurrection.cryptoassistant.data.model.FavouriteCryptoModel
 
-@Database(entities = arrayOf(CryptoMarketModel::class,CryptoDetailItem::class),version = 1)
+@Database(entities = arrayOf(CryptoMarketModel::class,CryptoDetailItem::class,FavouriteCryptoModel::class),version = 1)
 @TypeConverters(DataConverter::class)
 abstract class CryptoDatabase : RoomDatabase() {
 

@@ -4,21 +4,29 @@ import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import com.resurrection.cryptoassistant.data.model.CryptoDetailItem
+import com.resurrection.cryptoassistant.data.db.entity.CoinMarketEntity
 import com.resurrection.cryptoassistant.data.model.CryptoMarketModel
 
 @Dao
 interface CryptoDao {
 
+/*    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertAllCrypto(listCrypto: List<CoinMarketEntity>)*/
+
+ /*   @Query("SELECT * FROM table_coin WHERE name LIKE '%' || :parameter || '%' OR symbol LIKE '%' || :parameter || '%'")
+    suspend fun getCryptoByParameter(parameter: String): CoinMarketEntity*/
+
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertAllCrypto(listCrypto: List<CryptoMarketModel>)
+    suspend fun insertFavoriteCrypto(cmm: CryptoMarketModel)
 
-    @Query("SELECT * FROM crypto_market_model WHERE name LIKE '%' || :parameter || '%' OR symbol LIKE '%' || :parameter || '%'")
-    suspend fun getCryptoByParameter(parameter: String): List<CryptoMarketModel>
+    @Query("SELECT * FROM crypto_market_model")
+    suspend fun getCryptoFavorite(): List<CryptoMarketModel>
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertFavoriteCrypto(cryptoDetailItem:CryptoDetailItem)
 
-    @Query("SELECT * FROM crypto_favorite")
-    suspend fun getCryptoFavoriteByParameter(): List<CryptoDetailItem>
+    @Query("SELECT * FROM crypto_market_model where cryptoId = :cryptoId")
+    suspend fun getCryptoById(cryptoId:String):CryptoMarketModel
+
+
+
+
 }

@@ -13,5 +13,9 @@ interface CryptoApiService {
     fun getAllCrypto(): Observable<List<CryptoMarketModel>>
 
     @GET("coins/{id}")
-    fun getCryptoByID(@Path("id") id: String): Observable<CryptoDetailItem>
+    fun getCryptoById(@Path("id") id: String): Observable<CryptoDetailItem>
+
+
+/*    @GET("coins/{id}")
+    fun getCryptoDetailById(@Path("id") id: String): Observable<CryptoDetailItem>*/
 }
