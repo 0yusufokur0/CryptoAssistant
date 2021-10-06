@@ -14,6 +14,7 @@ import com.google.firebase.ktx.Firebase
 import com.resurrection.cryptoassistant.R
 import com.resurrection.cryptoassistant.data.model.CryptoDetailItem
 import com.resurrection.cryptoassistant.data.model.CryptoMarketModel
+import com.resurrection.cryptoassistant.data.model.FavouriteCryptoModel
 import com.resurrection.cryptoassistant.databinding.BottomSheetFragmentBinding
 import com.resurrection.cryptoassistant.ui.base.BaseBottomSheetFragment
 import dagger.hilt.android.AndroidEntryPoint
@@ -38,17 +39,15 @@ class CryptoDetailFragment(private val mContext: Context) :
         binding.favoriteImageView.setOnClickListener {
             val user = Firebase.auth.currentUser
             if (user != null) {
-                /*           // User is signed in
-                           val database = FirebaseDatabase.getInstance()
-                           val myRef = database.getReference("favorite_crypto").child(user.uid)
-                           myRef.setValue("Hello, World!");*/
-                val city = hashMapOf(
-                    "favorite_crypto_id" to binding.cryptoDetail!!.id,
 
-                    )
+                val test = FavouriteCryptoModel(
+                    binding.cryptoDetail!!.id,
+                    binding.cryptoDetail!!.marketData.currentPrice.usd.toString(),
+                    binding.cryptoDetail!!.lastUpdated
+                )
                 val db = FirebaseFirestore.getInstance()
                 db.collection(user.uid)
-                    .add(city)
+                    .add(test)
                     .addOnSuccessListener { documentReference ->
                         // get crypto  market data from detail api
                         var currentCrypto = binding.cryptoDetail!!

@@ -7,7 +7,9 @@ import androidx.room.PrimaryKey
 data class FavouriteCryptoModel(
     @PrimaryKey
     val id: String,
+    val currentPrice: String,
+    val saveTime:String
 
 ) {
-    constructor() : this("")
+    constructor() : this("","","")
 }
