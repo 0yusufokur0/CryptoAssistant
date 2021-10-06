@@ -1,4 +1,4 @@
-package com.resurrection.cryptoassistant
+package com.resurrection.cryptoassistant.data.db
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson
@@ -8,7 +8,7 @@ import com.resurrection.cryptoassistant.data.model.Description
 import com.resurrection.cryptoassistant.data.model.Image
 import com.resurrection.cryptoassistant.data.model.MarketData
 
-class DataConverter {
+class TypeConverter {
 
     @TypeConverter
     fun fromDescriptionLangGson(value: Description): String {
