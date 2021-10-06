@@ -96,7 +96,35 @@ class CryptoDetailFragment(private val mContext: Context) :
             Glide.with(requireContext()).load(it.image.large).into(binding.imgIconImage)
             binding.progressbar.visibility = View.INVISIBLE
             binding.favoriteImageView.setBackgroundColor(Color.RED)
+            isFavorite()
         })
+    }
+    fun isFavorite(){
+
+        val user = Firebase.auth.currentUser
+        if (user != null) {
+
+            val db = FirebaseFirestore.getInstance()
+            db.collection(user.uid).get()
+                .addOnSuccessListener { documentReference ->
+
+                    documentReference.documents.forEach {
+                        if (it.get("id") as String == binding.cryptoDetail!!.id){
+                            binding.favoriteImageView.setBackgroundColor(Color.GREEN)
+                        }else{
+                            binding.favoriteImageView.setBackgroundColor(Color.RED)
+                        }
+                    }
+
+
+                }
+                .addOnFailureListener { e ->
+
+                }
+
+        } else {
+            // No user is signed in
+        }
     }
 
 
