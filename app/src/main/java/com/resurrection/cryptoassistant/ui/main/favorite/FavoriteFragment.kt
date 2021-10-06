@@ -19,10 +19,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
     private val viewModel: FavoriteViewModel by viewModels()
-    private var cryptoIDList :List<FavouriteCryptoModel>? = null
-/*
-    private var cryptoDetails :ArrayList<CryptoDetailItem> = ArrayList<CryptoDetailItem>()
-*/
+    private var cryptoIDList: List<FavouriteCryptoModel>? = null
     private var favoriteCryptoModels = ArrayList<CryptoMarketModel>()
     private var cryptoDetail: CryptoDetailFragment? = null
 
@@ -30,85 +27,64 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
         return R.layout.fragment_favorite
     }
 
-    fun adapterOnCLick(cmm :CryptoMarketModel){
+    fun adapterOnCLick(cmm: CryptoMarketModel) {
         val bundle = Bundle()
         bundle.putString("cryptoId", cmm.cryptoId.toString())
         cryptoDetail!!.arguments = bundle
-
         cryptoDetail!!.show(childFragmentManager, "Bottom Sheet")
-
     }
 
-
-    private var cryptoIds : ArrayList<CryptoDetailItem>? = ArrayList()
     override fun init(savedInstanceState: Bundle?) {
         viewModel.getAllFavoriteCrypto()
         cryptoDetail = CryptoDetailFragment(requireContext())
 
-        viewModel.allFavoriteCrypto!!.observe(viewLifecycleOwner, Observer {
 
+        viewModel.allFavoriteCrypto.observe(viewLifecycleOwner, Observer {
             it?.let {
-                if (it.size != 0){
-                    var adapter = CryptoCurrencyAdapter(it as ArrayList<CryptoMarketModel>,this::adapterOnCLick)
+                if (it.size != 0) {
+                    var adapter = CryptoCurrencyAdapter(
+                        it as ArrayList<CryptoMarketModel>,
+                        this::adapterOnCLick
+                    )
                     binding.cryptoFavoriteRecyclerView.adapter = adapter
-                }else{
+                } else {
                     println("veri yok firebase den çekicez")
                     fireStoreGetFavoriteList()
-
                 }
-
-
             }
         })
 
-
-
         viewModel.cryptoDetail.observe(viewLifecycleOwner, Observer {
             it?.let {
-                var cmm = CryptoMarketModel(it.id,
+                var cmm = CryptoMarketModel(
+                    it.id,
                     it.marketData.currentPrice.usd,
                     it.marketData.highestPrice24h.usd,
-                    it.image.large,it.lastUpdated,
+                    it.image.large, it.lastUpdated,
                     it.marketData.lowestPrice24h.usd,
                     it.name,
                     it.marketData.priceChange24h,
                     it.marketData.priceChangePercentage24h,
-                    it.symbol)
+                    it.symbol
+                )
                 favoriteCryptoModels.add(cmm)
-/*
-                cryptoDetails.add(it)
-*/
-                var adapter = CryptoCurrencyAdapter(favoriteCryptoModels,this::adapterOnCLick)
+                var adapter = CryptoCurrencyAdapter(favoriteCryptoModels, this::adapterOnCLick)
                 binding.cryptoFavoriteRecyclerView.adapter = adapter
             }
-
         })
-
-
     }
 
-
-    fun fireStoreGetFavoriteList(){
+    fun fireStoreGetFavoriteList() {
         val user = Firebase.auth.currentUser
         if (user != null) {
-
             val db = FirebaseFirestore.getInstance()
             db.collection(user.uid).get()
                 .addOnSuccessListener { documentReference ->
-/*
-                    println(documentReference.documents.get(0).get("favorite_crypto_id"))
-*/
                     documentReference.documents.forEach {
                         viewModel.getCryptoDetailById(it.get("id") as String)
-
                     }
-
-
                 }
-                .addOnFailureListener { e ->
-
-                }
-
+                .addOnFailureListener { e -> }
         } else {
             // No user is signed in
         }

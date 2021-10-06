@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.ktx.database
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.resurrection.cryptoassistant.R
@@ -28,14 +29,11 @@ class CryptoDetailFragment(private val mContext: Context) :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme)
-
-    }
+        setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme) }
 
     override fun init(savedInstanceState: Bundle?) {
         getDetail()
-
-
+        binding.favoriteImageView.setBackgroundColor(Color.BLUE)
         binding.favoriteImageView.setOnClickListener {
             val user = Firebase.auth.currentUser
             if (user != null) {
@@ -45,11 +43,11 @@ class CryptoDetailFragment(private val mContext: Context) :
                     binding.cryptoDetail!!.marketData.currentPrice.usd.toString(),
                     binding.cryptoDetail!!.lastUpdated
                 )
-                val db = FirebaseFirestore.getInstance()
-                db.collection(user.uid)
-                    .add(test)
-                    .addOnSuccessListener { documentReference ->
-                        // get crypto  market data from detail api
+
+                val database = Firebase.database
+                val myRef = database.getReference(user.uid).child("favorite")
+                    .child(binding.cryptoDetail!!.id).setValue(test)
+                    .addOnSuccessListener {
                         var currentCrypto = binding.cryptoDetail!!
                         var cryptomarketModel = CryptoMarketModel(
                             currentCrypto.id,
@@ -64,8 +62,7 @@ class CryptoDetailFragment(private val mContext: Context) :
                             currentCrypto.symbol
                         )
                         viewModel.insertFavoriteCrypto(cryptomarketModel)
-                    }
-                    .addOnFailureListener { e ->
+                    }.addOnFailureListener{
 
                     }
 
@@ -76,6 +73,14 @@ class CryptoDetailFragment(private val mContext: Context) :
 
         }
 
+        viewModel.isFavorite.observe(viewLifecycleOwner, Observer {
+            if (it!!){
+                binding.favoriteImageView.setBackgroundColor(Color.GREEN)
+            }else{
+                binding.favoriteImageView.setBackgroundColor(Color.RED)
+            }
+            println(it)
+        })
 
     }
 
@@ -86,6 +91,8 @@ class CryptoDetailFragment(private val mContext: Context) :
 
     fun getDetail() {
         val data = arguments?.getString("cryptoId")
+        viewModel.isFavorite(data!!)
+
         binding.progressbar.visibility = View.VISIBLE
 
         viewModel.getCryptoDetailById(data.toString())
@@ -95,15 +102,16 @@ class CryptoDetailFragment(private val mContext: Context) :
             println(it.image.small.toString())
             Glide.with(requireContext()).load(it.image.large).into(binding.imgIconImage)
             binding.progressbar.visibility = View.INVISIBLE
-            binding.favoriteImageView.setBackgroundColor(Color.RED)
-            isFavorite()
+
+
+
         })
     }
+/*
     fun isFavorite(){
 
         val user = Firebase.auth.currentUser
         if (user != null) {
-
             val db = FirebaseFirestore.getInstance()
             db.collection(user.uid).get()
                 .addOnSuccessListener { documentReference ->
@@ -115,8 +123,6 @@ class CryptoDetailFragment(private val mContext: Context) :
                             binding.favoriteImageView.setBackgroundColor(Color.RED)
                         }
                     }
-
-
                 }
                 .addOnFailureListener { e ->
 
@@ -126,6 +132,8 @@ class CryptoDetailFragment(private val mContext: Context) :
             // No user is signed in
         }
     }
+*/
+
 
 
 }
