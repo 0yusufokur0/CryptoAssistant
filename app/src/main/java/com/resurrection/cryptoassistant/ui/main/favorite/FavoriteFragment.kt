@@ -2,13 +2,11 @@ package com.resurrection.cryptoassistant.ui.main.favorite
 
 import android.os.Bundle
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.Observer
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.resurrection.cryptoassistant.R
-import com.resurrection.cryptoassistant.data.db.CryptoDatabase
 import com.resurrection.cryptoassistant.data.model.CryptoDetailItem
 import com.resurrection.cryptoassistant.data.model.CryptoMarketModel
 import com.resurrection.cryptoassistant.data.model.FavouriteCryptoModel
@@ -17,13 +15,15 @@ import com.resurrection.cryptoassistant.ui.base.BaseFragment
 import com.resurrection.cryptoassistant.ui.main.market.cryptocurrency.CryptoCurrencyAdapter
 import com.resurrection.cryptoassistant.ui.main.market.details.CryptoDetailFragment
 import dagger.hilt.android.AndroidEntryPoint
-import dagger.hilt.android.internal.Contexts.getApplication
 
 @AndroidEntryPoint
 class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
     private val viewModel: FavoriteViewModel by viewModels()
     private var cryptoIDList :List<FavouriteCryptoModel>? = null
-    private var favoriteCryptoModels :ArrayList<CryptoDetailItem> = ArrayList<CryptoDetailItem>()
+/*
+    private var cryptoDetails :ArrayList<CryptoDetailItem> = ArrayList<CryptoDetailItem>()
+*/
+    private var favoriteCryptoModels = ArrayList<CryptoMarketModel>()
     private var cryptoDetail: CryptoDetailFragment? = null
 
     override fun getLayoutRes(): Int {
@@ -46,9 +46,18 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
         cryptoDetail = CryptoDetailFragment(requireContext())
 
         viewModel.allFavoriteCrypto!!.observe(viewLifecycleOwner, Observer {
+
             it?.let {
-                var adapter = CryptoCurrencyAdapter(it as ArrayList<CryptoMarketModel>,this::adapterOnCLick)
-                binding.cryptoFavoriteRecyclerView.adapter = adapter
+                if (it.size != 0){
+                    var adapter = CryptoCurrencyAdapter(it as ArrayList<CryptoMarketModel>,this::adapterOnCLick)
+                    binding.cryptoFavoriteRecyclerView.adapter = adapter
+                }else{
+                    println("veri yok firebase den çekicez")
+                    fireStoreGetFavoriteList()
+
+                }
+
+
             }
         })
 
@@ -56,51 +65,24 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
 
         viewModel.cryptoDetail.observe(viewLifecycleOwner, Observer {
             it?.let {
-                favoriteCryptoModels.add(it)
-            }
-
-        })
-
+                var cmm = CryptoMarketModel(it.id,
+                    it.marketData.currentPrice.usd,
+                    it.marketData.highestPrice24h.usd,
+                    it.image.large,it.lastUpdated,
+                    it.marketData.lowestPrice24h.usd,
+                    it.name,
+                    it.marketData.priceChange24h,
+                    it.marketData.priceChangePercentage24h,
+                    it.symbol)
+                favoriteCryptoModels.add(cmm)
 /*
-        viewModel.getFavorite()
-
-        viewModel.cryptoDetails.observe(viewLifecycleOwner, Observer {
-            cryptoIDList = it
-            cryptoIDList!!.forEach {
-                viewModel.getCryptoById(it.id)
-                println("<<<"+it.id)
-            }
-        })
-
-        var str = ""
-        viewModel.cryptoModel.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                favoriteCryptoModels.add(it)
-                str += it.name.toString()
-                println(">>>"+str)
-
-
-
-
-
-                binding.textDashboard.text = it.name
-            }
-                binding.textDashboard.text = it.name
-
-        })
+                cryptoDetails.add(it)
 */
-
-/*
-        viewModel.getFavoriteListByIds()
-        viewModel.cryptoModels.observe(viewLifecycleOwner, Observer {
-        it?.let {
-            it!!.forEach {
-                println(it!!.name)
+                var adapter = CryptoCurrencyAdapter(favoriteCryptoModels,this::adapterOnCLick)
+                binding.cryptoFavoriteRecyclerView.adapter = adapter
             }
-        }
 
         })
-*/
 
 
     }
@@ -117,7 +99,7 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
                     println(documentReference.documents.get(0).get("favorite_crypto_id"))
 */
                     documentReference.documents.forEach {
-                        viewModel.getCryptoDetailById(it.get("favorite_crypto_id")as String)
+                        viewModel.getCryptoDetailById(it.get("id") as String)
 
                     }
 
