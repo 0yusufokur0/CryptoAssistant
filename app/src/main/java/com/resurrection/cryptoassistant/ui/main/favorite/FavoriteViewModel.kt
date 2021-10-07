@@ -15,17 +15,21 @@ import com.resurrection.cryptoassistant.ui.base.BaseViewModel
 import kotlinx.coroutines.launch
 
 class FavoriteViewModel(application: Application) : BaseViewModel(application) {
-
+    var app = application
     var cryptoDetail = MutableLiveData<CryptoDetailItem>()
+/*
     val dao = CryptoDatabase(getApplication()).cryptoDao()
+*/
     var allFavoriteCrypto = MutableLiveData<List<CryptoMarketModel>>()
 
     fun getCryptoDetailById(id: String) = viewModelScope.launch {
-        cryptoDetail.value = RepositoryTest.api.getCryptoById(id)
+        cryptoDetail.value = RepositoryTest(app).api.getCryptoById(id)
     }
 
     fun getAllFavoriteCrypto() = viewModelScope.launch {
-        allFavoriteCrypto.value = dao.getCryptoFavorite()
+        /*allFavoriteCrypto.value = dao.getCryptoFavorite()*/
+        allFavoriteCrypto.value = RepositoryTest(app).dao.getCryptoFavorite()
+        RepositoryTest(app).api
     }
 
 

@@ -34,11 +34,12 @@ class CryptoDetailViewModel @Inject constructor(application: Application) :
     var cryptoDetail = MutableLiveData<CryptoDetailItem>()
     val dao = CryptoDatabase(getApplication()).cryptoDao()
     var isFavorite = MutableLiveData<Boolean?>()
+    var app = application
 
 
     fun getCryptoDetailById(id:String){
         job = CoroutineScope(Dispatchers.IO).launch {
-            var temp = RepositoryTest.api.getCryptoById(id)
+            var temp = RepositoryTest(app).api.getCryptoById(id)
             cryptoDetail.postValue(temp)
         }
     }

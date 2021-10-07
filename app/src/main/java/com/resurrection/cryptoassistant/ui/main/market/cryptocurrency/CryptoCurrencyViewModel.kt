@@ -17,12 +17,13 @@ import javax.inject.Inject
 class CryptoCurrencyViewModel @Inject constructor(application: Application) :
     BaseViewModel(application) {
         var job : Job? = null
+    var app = application
 
     var allCrypto = MutableLiveData<List<CryptoMarketModel>>()
 
  fun getAllCrypto() =  viewModelScope.launch {
      job = CoroutineScope(Dispatchers.IO).launch {
-         var temp = RepositoryTest.api.getAllCrypto()
+         var temp = RepositoryTest(app).api.getAllCrypto()
          allCrypto.postValue(temp)
      }
     }

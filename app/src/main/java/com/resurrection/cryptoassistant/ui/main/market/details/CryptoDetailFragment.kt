@@ -33,7 +33,7 @@ class CryptoDetailFragment(private val mContext: Context) :
 
     override fun init(savedInstanceState: Bundle?) {
         getDetail()
-        binding.favoriteImageView.setBackgroundColor(Color.BLUE)
+        binding.favoriteImageView.setBackgroundColor(Color.RED)
         binding.favoriteImageView.setOnClickListener {
             val user = Firebase.auth.currentUser
             if (user != null) {

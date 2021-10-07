@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.google.firebase.auth.ktx.auth
+import com.google.firebase.database.ktx.database
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.resurrection.cryptoassistant.R
@@ -49,7 +50,7 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
                     binding.cryptoFavoriteRecyclerView.adapter = adapter
                 } else {
                     println("veri yok firebase den çekicez")
-                    fireStoreGetFavoriteList()
+                    getfireStoreGetFavoriteList()
                 }
             }
         })
@@ -74,9 +75,24 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
         })
     }
 
-    fun fireStoreGetFavoriteList() {
+    fun getfireStoreGetFavoriteList() {
         val user = Firebase.auth.currentUser
         if (user != null) {
+            var favList= ArrayList<FavouriteCryptoModel>()
+            val database = Firebase.database
+            val myRef = database.getReference(user.uid).child("favorite").get().addOnSuccessListener {
+                println(it)
+                it.children.forEach {
+                    println("--------------------")
+                    var fcm :FavouriteCryptoModel = it.getValue(FavouriteCryptoModel::class.java)!!
+                    println(fcm.id+" "+fcm.currentPrice)
+                    viewModel.getCryptoDetailById(fcm.id)
+                }
+            }.addOnFailureListener {
+
+            }
+
+
             val db = FirebaseFirestore.getInstance()
             db.collection(user.uid).get()
                 .addOnSuccessListener { documentReference ->
@@ -88,5 +104,25 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
         } else {
             // No user is signed in
         }
+
+
+
+/*        val database = Firebase.database
+        val myRef = database.getReference(user.uid).child("favorite")
+            .child(checkId).get().addOnSuccessListener {
+                if (it.value == null){
+                    isFavorite.value = false
+                    println(it)
+                }else{
+                    isFavorite.value = true
+                }
+
+                println(it)
+            }.addOnFailureListener {
+                isFavorite.value = false
+            }*/
+
+
+
     }
 }
