@@ -17,13 +17,8 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
                 binding.editLoginEmail.editableText.toString(),
                 binding.editLoginPasswd.editableText.toString()
             )
-                .addOnSuccessListener {
-
-                }.addOnFailureListener {
-
-                }
+                .addOnSuccessListener { }
+                .addOnFailureListener { }
         }
-
     }
-
 }

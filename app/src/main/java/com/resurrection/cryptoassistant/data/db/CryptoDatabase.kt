@@ -10,24 +10,28 @@ import com.resurrection.cryptoassistant.data.model.CryptoDetailItem
 import com.resurrection.cryptoassistant.data.model.CryptoMarketModel
 import com.resurrection.cryptoassistant.data.model.FavouriteCryptoModel
 
-@Database(entities = arrayOf(CryptoMarketModel::class,CryptoDetailItem::class,FavouriteCryptoModel::class),version = 1)
+@Database(
+    entities = [CryptoMarketModel::class, CryptoDetailItem::class, FavouriteCryptoModel::class],
+    version = 1
+)
 @TypeConverters(TypeConverter::class)
 abstract class CryptoDatabase : RoomDatabase() {
 
-    abstract fun cryptoDao() : CryptoDao
+    abstract fun cryptoDao(): CryptoDao
 
     companion object {
-        @Volatile private var instance : CryptoDatabase? = null
+        @Volatile
+        private var instance: CryptoDatabase? = null
         private val lock = Any()
 
-        operator fun invoke(context : Context) = instance ?: synchronized(lock) {
+        operator fun invoke(context: Context) = instance ?: synchronized(lock) {
             instance ?: createDatabase(context).also {
                 instance = it
             }
         }
 
-        private fun createDatabase(context : Context) = Room.databaseBuilder(
-            context.applicationContext,CryptoDatabase::class.java,"crypto"
+        private fun createDatabase(context: Context) = Room.databaseBuilder(
+            context.applicationContext, CryptoDatabase::class.java, "crypto"
         ).build()
     }
 }

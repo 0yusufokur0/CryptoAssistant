@@ -8,8 +8,8 @@ import com.resurrection.cryptoassistant.data.model.CryptoMarketModel
 import com.resurrection.cryptoassistant.databinding.FragmentCryptoCurrencyBinding
 import com.resurrection.cryptoassistant.ui.base.BaseFragment
 import com.resurrection.cryptoassistant.ui.main.market.details.CryptoDetailFragment
-import kotlinx.coroutines.*
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Job
 
 @AndroidEntryPoint
 class CryptoCurrencyFragment : BaseFragment<FragmentCryptoCurrencyBinding>() {
@@ -29,35 +29,19 @@ class CryptoCurrencyFragment : BaseFragment<FragmentCryptoCurrencyBinding>() {
         cryptoDetail = CryptoDetailFragment(requireContext())
         viewModel.getAllCrypto()
         viewModel.allCrypto.observe(viewLifecycleOwner, Observer {
-                     it?.let {
-            adapter = CryptoCurrencyAdapter(it as ArrayList<CryptoMarketModel>,this::adapterOnCLick)
-            binding.cryptoCurrencyRecyclerView.adapter = adapter
-            println(it.get(0).cryptoImage.toString())
-    }
+            it?.let {
+                adapter = CryptoCurrencyAdapter(it as ArrayList<CryptoMarketModel>, this::adapterOnCLick)
+                binding.cryptoCurrencyRecyclerView.adapter = adapter
+            }
         })
-
     }
 
-
-    fun handleResponse(asd: Any?) {
-        cryptoModels = ArrayList(asd as List<CryptoMarketModel>)
-
-        cryptoModels?.let {
-            adapter = CryptoCurrencyAdapter(cryptoModels!!,this::adapterOnCLick)
-            binding.cryptoCurrencyRecyclerView.adapter = adapter
-    }
-           }
-
-    fun adapterOnCLick(cmm :CryptoMarketModel){
-
+    fun adapterOnCLick(cmm: CryptoMarketModel) {
         val bundle = Bundle()
         bundle.putString("cryptoId", cmm.cryptoId.toString())
         cryptoDetail!!.arguments = bundle
-
         cryptoDetail!!.show(childFragmentManager, "Bottom Sheet")
-
     }
-
 }
 
 

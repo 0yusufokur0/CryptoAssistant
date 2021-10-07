@@ -3,7 +3,6 @@ package com.resurrection.cryptoassistant.data.db
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.resurrection.cryptoassistant.data.model.CryptoDetailItem
 import com.resurrection.cryptoassistant.data.model.Description
 import com.resurrection.cryptoassistant.data.model.Image
 import com.resurrection.cryptoassistant.data.model.MarketData

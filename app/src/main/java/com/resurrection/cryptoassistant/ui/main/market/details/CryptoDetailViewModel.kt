@@ -8,7 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import com.resurrection.cryptoassistant.data.RepositoryTest
+import com.resurrection.cryptoassistant.data.repository.CryptoRepository
 import com.resurrection.cryptoassistant.data.db.CryptoDatabase
 import com.resurrection.cryptoassistant.data.model.CryptoDetailItem
 import com.resurrection.cryptoassistant.data.model.FavouriteCryptoModel
@@ -33,7 +33,7 @@ class CryptoDetailViewModel @Inject constructor(application: Application) :
 
     fun getCryptoDetailById(id: String) {
         job = CoroutineScope(Dispatchers.IO).launch {
-            var temp = RepositoryTest(app).api.getCryptoById(id)
+            var temp = CryptoRepository(app).api.getCryptoById(id)
             cryptoDetail.postValue(temp)
         }
     }

@@ -3,6 +3,7 @@ package com.resurrection.cryptoassistant.ui.auth
 import android.content.Intent
 import android.os.Bundle
 import com.google.firebase.auth.FirebaseAuth
+import com.resurrection.cryptoassistant.R
 import com.resurrection.cryptoassistant.databinding.FragmentLoginBinding
 import com.resurrection.cryptoassistant.ui.base.BaseFragment
 import com.resurrection.cryptoassistant.ui.main.HomeActivity
@@ -11,7 +12,7 @@ import com.resurrection.cryptoassistant.ui.main.HomeActivity
 class LoginFragment : BaseFragment<FragmentLoginBinding>() {
 
     override fun getLayoutRes(): Int {
-        return com.resurrection.cryptoassistant.R.layout.fragment_login
+        return R.layout.fragment_login
     }
 
     override fun init(savedInstanceState: Bundle?) {
@@ -21,12 +22,9 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                 binding.editLoginPasswd.editableText.toString()
             ).addOnSuccessListener {
                 startActivity(Intent(activity, HomeActivity::class.java))
-
             }.addOnFailureListener {
 
             }
         }
     }
-
-
 }

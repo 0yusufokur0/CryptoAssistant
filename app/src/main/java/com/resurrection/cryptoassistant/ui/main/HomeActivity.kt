@@ -39,7 +39,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
 
     }
 
-
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
         menuInflater.inflate(R.menu.main, menu)
         return true
@@ -49,7 +48,6 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
         val navController = findNavController(R.id.nav_host_fragment_content_main)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
-
 
 }
 

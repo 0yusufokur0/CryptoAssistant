@@ -1,5 +1,6 @@
 package com.resurrection.cryptoassistant.ui
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
@@ -12,27 +13,27 @@ import com.resurrection.cryptoassistant.ui.base.BaseActivity
 import com.resurrection.cryptoassistant.ui.main.HomeActivity
 import dagger.hilt.android.AndroidEntryPoint
 
+@SuppressLint("CustomSplashScreen")
 @AndroidEntryPoint
 class SplashActivity : BaseActivity<ActivitySplashBinding>(), Animation.AnimationListener {
 
-    lateinit var animationImageView: Animation
+    private lateinit var animationImageView: Animation
     private var loginState = false
 
-    override fun getLayoutRes(): Int { return R.layout.activity_splash }
+    override fun getLayoutRes(): Int {
+        return R.layout.activity_splash
+    }
 
     override fun init(savedInstanceState: Bundle?) {
-        if (FirebaseAuth.getInstance().currentUser != null){
+        if (FirebaseAuth.getInstance().currentUser != null) {
             loginState = true
             startActivity(Intent(this@SplashActivity, HomeActivity::class.java))
             overridePendingTransition(R.anim.fade_in, R.anim.fade_in)
-        }else{
+        } else {
             animationImageView = AnimationUtils.loadAnimation(applicationContext, R.anim.zoom_out)
             animationImageView.setAnimationListener(this)
             binding.splashTextView.startAnimation(animationImageView)
         }
-
-
-
     }
 
     override fun onAnimationStart(p0: Animation?) {}
@@ -40,10 +41,8 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(), Animation.Animatio
     override fun onAnimationEnd(p0: Animation?) {
         if (p0 == animationImageView) {
             binding.splashTextView.visibility = View.INVISIBLE
-                startActivity(Intent(this@SplashActivity, AuthActivity::class.java))
-                overridePendingTransition(R.anim.fade_in, R.anim.fade_in)
-
-
+            startActivity(Intent(this@SplashActivity, AuthActivity::class.java))
+            overridePendingTransition(R.anim.fade_in, R.anim.fade_in)
         }
     }
 
