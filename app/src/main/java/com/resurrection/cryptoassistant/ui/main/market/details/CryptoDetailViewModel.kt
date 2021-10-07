@@ -22,18 +22,18 @@ import javax.inject.Inject
 
 
 @HiltViewModel
-class CryptoDetailViewModel @Inject constructor(application: Application) :
-    BaseViewModel(application) {
+class CryptoDetailViewModel @Inject constructor(val cryptoRepository: CryptoRepository) :
+    BaseViewModel() {
     var job: Job? = null
     var cryptoDetail = MutableLiveData<CryptoDetailItem>()
-    val dao = CryptoDatabase(getApplication()).cryptoDao()
+
     var isFavorite = MutableLiveData<Boolean?>()
-    var app = application
+
 
 
     fun getCryptoDetailById(id: String) {
         job = CoroutineScope(Dispatchers.IO).launch {
-            var temp = CryptoRepository(app).api.getCryptoById(id)
+            var temp = cryptoRepository.api.getCryptoById(id)
             cryptoDetail.postValue(temp)
         }
     }

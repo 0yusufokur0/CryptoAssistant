@@ -14,15 +14,14 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class CryptoCurrencyViewModel @Inject constructor(application: Application) :
-    BaseViewModel(application) {
+class CryptoCurrencyViewModel @Inject constructor(val cryptoRepository: CryptoRepository ) :
+    BaseViewModel() {
     var job: Job? = null
-    var app = application
     var allCrypto = MutableLiveData<List<CryptoMarketModel>>()
 
     fun getAllCrypto() = viewModelScope.launch {
         job = CoroutineScope(Dispatchers.IO).launch {
-            var temp = CryptoRepository(app).api.getAllCrypto()
+            var temp = cryptoRepository.api.getAllCrypto()
             allCrypto.postValue(temp)
         }
     }
