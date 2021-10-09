@@ -8,19 +8,31 @@ import com.resurrection.cryptoassistant.data.model.CryptoDetailItem
 import com.resurrection.cryptoassistant.data.model.CryptoMarketModel
 import com.resurrection.cryptoassistant.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+
 @HiltViewModel
-class FavoriteViewModel @Inject constructor ( private val cryptoRepository: CryptoRepository) : BaseViewModel() {
+class FavoriteViewModel @Inject constructor(private val cryptoRepository: CryptoRepository) :
+    BaseViewModel() {
+
+
+    var job: Job? = null
 
     var cryptoDetail = MutableLiveData<CryptoDetailItem>()
-/*
-    val dao = CryptoDatabase(getApplication()).cryptoDao()
-*/
+
+    /*
+        val dao = CryptoDatabase(getApplication()).cryptoDao()
+    */
     var allFavoriteCrypto = MutableLiveData<List<CryptoMarketModel>>()
 
-    fun getCryptoDetailById(id: String) = viewModelScope.launch {
-        cryptoDetail.value = cryptoRepository.api.getCryptoById(id)
+    fun getCryptoDetailById(id: String) {
+        job = CoroutineScope(Dispatchers.IO).launch {
+            var temp = cryptoRepository.api.getCryptoById(id)
+            cryptoDetail.postValue(temp)
+        }
     }
 
     fun getAllFavoriteCrypto() = viewModelScope.launch {
@@ -30,6 +42,8 @@ class FavoriteViewModel @Inject constructor ( private val cryptoRepository: Cryp
     }
 
 
-
-
+    override fun onCleared() {
+        super.onCleared()
+        job = null
+    }
 }

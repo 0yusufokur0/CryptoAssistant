@@ -8,13 +8,12 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import com.resurrection.cryptoassistant.R
-import com.resurrection.cryptoassistant.data.model.CryptoDetailItem
 import com.resurrection.cryptoassistant.data.model.CryptoMarketModel
 import com.resurrection.cryptoassistant.data.model.FavouriteCryptoModel
 import com.resurrection.cryptoassistant.databinding.FragmentFavoriteBinding
 import com.resurrection.cryptoassistant.ui.base.BaseFragment
+import com.resurrection.cryptoassistant.ui.main.favorite.favoritedetail.FavoriteDetailFragment
 import com.resurrection.cryptoassistant.ui.main.market.cryptocurrency.CryptoCurrencyAdapter
-import com.resurrection.cryptoassistant.ui.main.market.details.CryptoDetailFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -22,7 +21,7 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
     private val viewModel: FavoriteViewModel by viewModels()
     private var cryptoIDList: List<FavouriteCryptoModel>? = null
     private var favoriteCryptoModels = ArrayList<CryptoMarketModel>()
-    private var cryptoDetail: CryptoDetailFragment? = null
+    private var cryptoDetail: FavoriteDetailFragment? = null
 
     override fun getLayoutRes(): Int {
         return R.layout.fragment_favorite
@@ -37,7 +36,7 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
 
     override fun init(savedInstanceState: Bundle?) {
         viewModel.getAllFavoriteCrypto()
-        cryptoDetail = CryptoDetailFragment(requireContext())
+        cryptoDetail = FavoriteDetailFragment()
 
 
         viewModel.allFavoriteCrypto.observe(viewLifecycleOwner, Observer {

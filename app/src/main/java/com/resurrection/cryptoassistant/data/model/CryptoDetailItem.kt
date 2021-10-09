@@ -29,5 +29,5 @@ data class CryptoDetailItem(
     val marketData: MarketData,
 
     @SerializedName("last_updated")
-    val lastUpdated: String,
+    var lastUpdated: String,
 )

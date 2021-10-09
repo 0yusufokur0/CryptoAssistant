@@ -1,4 +1,4 @@
-package com.resurrection.cryptoassistant.ui.main.market.details
+package com.resurrection.cryptoassistant.ui.main.favorite.favoritedetail
 
 import android.app.Application
 import android.graphics.Color
@@ -18,40 +18,47 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import java.text.SimpleDateFormat
-import java.util.*
 import javax.inject.Inject
 
 
 @HiltViewModel
-class CryptoDetailViewModel @Inject constructor(val cryptoRepository: CryptoRepository) :
+class FavoriteDetailViewModel @Inject constructor(val cryptoRepository: CryptoRepository) :
     BaseViewModel() {
     var job: Job? = null
     var cryptoDetail = MutableLiveData<CryptoDetailItem>()
-
+    var cryptoFromFirebase = MutableLiveData<FavouriteCryptoModel>()
     var isFavorite = MutableLiveData<Boolean?>()
 
     var isRemoved = MutableLiveData<Boolean>()
+
     fun getCryptoDetailById(id: String) {
         job = CoroutineScope(Dispatchers.IO).launch {
             var temp = cryptoRepository.api.getCryptoById(id)
             cryptoDetail.postValue(temp)
         }
     }
+    fun getCryptoByFirebase(id:String){
+        val user = Firebase.auth.currentUser
+        if (user != null) {
+            val database = Firebase.database
+            val myRef = database.getReference(user.uid).child("favorite")
+                .child(id).get()
+                .addOnSuccessListener {
+                    cryptoFromFirebase.value = it.getValue(FavouriteCryptoModel::class.java)
 
-
+                }.addOnFailureListener { }
+        } else { /*No user is signed in */
+        }
+    }
 
     fun insertFavoriteCrypto(cryptoDetail: CryptoDetailItem, favoriteImageView: ImageView) =
         viewModelScope.launch {
             val user = Firebase.auth.currentUser
             if (user != null) {
-                val sdf = SimpleDateFormat("dd/M/yyyy hh:mm")
-                val currentDate = sdf.format(Date())
-
                 val test = FavouriteCryptoModel(
                     cryptoDetail.id,
                     cryptoDetail.marketData.currentPrice.usd.toString(),
-                    currentDate
+                    cryptoDetail.lastUpdated
                 )
                 val database = Firebase.database
                 val myRef = database.getReference(user.uid).child("favorite")

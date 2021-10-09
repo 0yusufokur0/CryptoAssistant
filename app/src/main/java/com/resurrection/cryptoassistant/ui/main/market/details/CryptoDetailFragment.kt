@@ -33,13 +33,18 @@ class CryptoDetailFragment(private val mContext: Context) :
 
     override fun init(savedInstanceState: Bundle?) {
         getDetail()
+        println("detay açıldı")
         binding.favoriteImageView.setBackgroundColor(Color.RED)
         binding.favoriteImageView.setOnClickListener {
             if (!isFavorite){
                 viewModel.insertFavoriteCrypto(binding.cryptoDetail!!,binding.favoriteImageView)
+                println("favorilere eklendi")
+                isFavorite = true
             }else{
                 viewModel.removeFavroite(binding.cryptoDetail!!.id)
-            /*this crypto is favorite */ }
+                println("favorilerden çıkarıldı")
+                isFavorite = false
+                /*this crypto is favorite */ }
         }
 
         viewModel.isFavorite.observe(viewLifecycleOwner, Observer {
