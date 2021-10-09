@@ -29,7 +29,7 @@ class CryptoDetailViewModel @Inject constructor(val cryptoRepository: CryptoRepo
 
     var isFavorite = MutableLiveData<Boolean?>()
 
-
+    var isRemoved = MutableLiveData<Boolean>()
 
     fun getCryptoDetailById(id: String) {
         job = CoroutineScope(Dispatchers.IO).launch {
@@ -58,6 +58,21 @@ class CryptoDetailViewModel @Inject constructor(val cryptoRepository: CryptoRepo
 
         }
 
+    fun removeFavroite(id: String) {
+        val user = Firebase.auth.currentUser
+        if (user != null) {
+
+            val database = Firebase.database
+            val myRef = database.getReference(user.uid).child("favorite")
+                .child(id).setValue(null)
+                .addOnSuccessListener {
+                    isRemoved.value = true
+                }.addOnFailureListener {
+                    isRemoved.value = false
+                }
+        } else { /*No user is signed in */
+        }
+    }
 
     fun isFavorite(checkId: String) {
         val user = Firebase.auth.currentUser

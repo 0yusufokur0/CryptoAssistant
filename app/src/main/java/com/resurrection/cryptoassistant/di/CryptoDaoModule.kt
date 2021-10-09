@@ -4,7 +4,6 @@ import android.content.Context
 import androidx.room.Room
 import com.resurrection.cryptoassistant.data.db.CryptoDatabase
 import com.resurrection.cryptoassistant.data.db.dao.CryptoDao
-
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

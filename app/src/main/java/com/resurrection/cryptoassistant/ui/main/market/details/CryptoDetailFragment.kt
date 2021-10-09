@@ -37,7 +37,9 @@ class CryptoDetailFragment(private val mContext: Context) :
         binding.favoriteImageView.setOnClickListener {
             if (!isFavorite){
                 viewModel.insertFavoriteCrypto(binding.cryptoDetail!!,binding.favoriteImageView)
-            }else{ /*this crypto is favorite */ }
+            }else{
+                viewModel.removeFavroite(binding.cryptoDetail!!.id)
+            /*this crypto is favorite */ }
         }
 
         viewModel.isFavorite.observe(viewLifecycleOwner, Observer {
@@ -49,6 +51,12 @@ class CryptoDetailFragment(private val mContext: Context) :
                 isFavorite = false
             }
             println(it)
+        })
+
+        viewModel.isRemoved.observe(viewLifecycleOwner, Observer {
+            if (it){
+                binding.favoriteImageView.setBackgroundColor(Color.RED)
+            }
         })
 
     }
