@@ -20,5 +20,13 @@ class RegisterFragment : BaseFragment<FragmentRegisterBinding>() {
                 .addOnSuccessListener { }
                 .addOnFailureListener { }
         }
+        binding.orLoginBtn.setOnClickListener {
+            this.parentFragmentManager
+                .beginTransaction()
+                .setCustomAnimations(R.anim.left_to_right_first, R.anim.left_to_right_second)
+                .replace(R.id.authFrameLayout, LoginFragment())
+                .addToBackStack(null)
+                .commit()
+        }
     }
 }

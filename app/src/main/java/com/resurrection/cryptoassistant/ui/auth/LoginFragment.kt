@@ -3,10 +3,11 @@ package com.resurrection.cryptoassistant.ui.auth
 import android.content.Intent
 import android.os.Bundle
 import com.google.firebase.auth.FirebaseAuth
-import com.resurrection.cryptoassistant.R
 import com.resurrection.cryptoassistant.databinding.FragmentLoginBinding
 import com.resurrection.cryptoassistant.ui.base.BaseFragment
 import com.resurrection.cryptoassistant.ui.main.HomeActivity
+
+import com.resurrection.cryptoassistant.R
 
 
 class LoginFragment : BaseFragment<FragmentLoginBinding>() {
@@ -25,6 +26,14 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
             }.addOnFailureListener {
 
             }
+        }
+        binding.orRegisterBtn.setOnClickListener {
+            this.parentFragmentManager
+            .beginTransaction()
+            .setCustomAnimations(R.anim.right_to_left_first, R.anim.right_to_left_second,)
+            .replace(R.id.authFrameLayout, RegisterFragment())
+            .addToBackStack(null)
+            .commit()
         }
     }
 }

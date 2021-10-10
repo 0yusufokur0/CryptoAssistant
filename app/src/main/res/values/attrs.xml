@@ -3,4 +3,5 @@
     <attr name="bgColor" format="color"/>
     <attr name="statusBarColor" format="color"/>
     <attr name="bottomSheetBg" format="color"/>
+    <attr name="authAreaBg" format="color"/>
 </resources>

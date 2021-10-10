@@ -13,7 +13,7 @@ class AuthActivity : BaseActivity<ActivityAuthBinding>() {
 
     override fun init(savedInstanceState: Bundle?) {
         this.supportFragmentManager
-            .beginTransaction().setCustomAnimations(R.anim.right_to_left, R.anim.left_to_right)
+            .beginTransaction().setCustomAnimations(R.anim.right_to_left_second, R.anim.right_to_left_first)
             .replace(R.id.authFrameLayout, LoginFragment())
             .addToBackStack(null)
             .commit()

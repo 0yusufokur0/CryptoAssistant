@@ -27,6 +27,8 @@
         <item name="bgColor">#FFFFFF</item>
         <item name="statusBarColor">#9B9B9B</item>
         <item name="android:statusBarColor" tools:targetApi="l">?attr/statusBarColor</item>
+        <item name="authAreaBg">#FFFFFF</item>
+
     </style>
 
 
