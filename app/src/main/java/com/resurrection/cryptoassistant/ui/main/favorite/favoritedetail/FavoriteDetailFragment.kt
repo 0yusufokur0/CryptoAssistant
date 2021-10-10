@@ -8,7 +8,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.resurrection.cryptoassistant.R
 import com.resurrection.cryptoassistant.databinding.FragmentFavoriteDetailBinding
 import com.resurrection.cryptoassistant.ui.base.BaseBottomSheetFragment
-import com.resurrection.cryptoassistant.ui.main.market.details.CryptoDetailViewModel
+import com.resurrection.cryptoassistant.util.setCryptoPriceBackground
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.*
@@ -28,9 +28,10 @@ class FavoriteDetailFragment : BaseBottomSheetFragment<FragmentFavoriteDetailBin
     override fun init(savedInstanceState: Bundle?) {
         val data = arguments?.getString("cryptoId")
         viewModel.getCryptoDetailById(data!!)
+
         viewModel.cryptoDetail.observe(viewLifecycleOwner, Observer {
-            viewModel.getCryptoByFirebase(data!!)
             binding.cryptoDetail = it
+            viewModel.getCryptoByFirebase(data!!)
             val sdf = SimpleDateFormat("dd/M/yyyy hh:mm")
             val currentDate = sdf.format(Date())
 
@@ -39,6 +40,14 @@ class FavoriteDetailFragment : BaseBottomSheetFragment<FragmentFavoriteDetailBin
         })
         viewModel.cryptoFromFirebase.observe(viewLifecycleOwner, Observer {
             binding.favoriteCrypto = it
+            binding.favoriteCrypto?.let {
+                binding.cryptoDetail?.let {
+                    var priceDifference:Double = binding.cryptoDetail!!.marketData.currentPrice.usd.toDouble() - binding.favoriteCrypto!!.currentPrice.toDouble()
+                    var tempString :String = String.format("%.2f", priceDifference)
+                    binding.priceDifference.text = " $tempString "
+                    binding.priceDifference.setCryptoPriceBackground(priceDifference)
+                }
+            }
 
         })
 

@@ -1,8 +1,12 @@
 package com.resurrection.cryptoassistant.util
 
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat
 import androidx.core.widget.doAfterTextChanged
 import androidx.databinding.BindingAdapter
 import coil.load
@@ -20,7 +24,7 @@ fun ImageView.setBackground(number: Double) {
 }
 
 @BindingAdapter("setCoinPriceBackground")
-fun TextView.setCoinPriceBackground(number: Double) {
+fun TextView.setCryptoPriceBackground(number: Double) {
     this.setBackgroundResource(if (number > 0) R.drawable.coin_price_up_bg else R.drawable.coin_price_up_down)
 }
 

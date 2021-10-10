@@ -31,47 +31,51 @@ class CryptoDetailFragment(private val mContext: Context) :
     }
 
     override fun init(savedInstanceState: Bundle?) {
-        getDetail()
-        println("detay açıldı")
+        val data = arguments?.getString("cryptoId")
+        binding.progressbar.visibility = View.VISIBLE
         binding.favoriteImageView.changeIconColor(false)
+
+        setViewModels()
+
+        viewModel.isFavorite(data!!)
+        viewModel.getCryptoDetailById(data.toString())
+
         binding.favoriteImageView.setOnClickListener {
             if (!isFavorite) {
                 viewModel.insertFavoriteCrypto(binding.cryptoDetail!!)
                 binding.favoriteImageView.changeIconColor(false)
-                println("favorilere eklendi")
                 isFavorite = true
             } else {
                 viewModel.removeFavroite(binding.cryptoDetail!!.id)
                 binding.favoriteImageView.changeIconColor(true)
-
-                println("favorilerden çıkarıldı")
                 isFavorite = false
-                /*this crypto is favorite */
             }
         }
 
+
+    }
+
+    fun setViewModels() {
+        viewModel.cryptoDetail.observe(viewLifecycleOwner, Observer {
+            binding.cryptoDetail = null
+            binding.cryptoDetail = it
+            println(it.image.small.toString())
+            Glide.with(requireContext()).load(it.image.large).into(binding.imgIconImage)
+            binding.progressbar.visibility = View.INVISIBLE
+        })
+
         viewModel.isFavorite.observe(viewLifecycleOwner, Observer {
             if (it!!) {
-/*
-                binding.favoriteImageView.setBackgroundColor(Color.GREEN)
-*/
                 binding.favoriteImageView.changeIconColor(true)
                 isFavorite = true
             } else {
-/*
-                binding.favoriteImageView.setBackgroundColor(Color.RED)
-*/
                 binding.favoriteImageView.changeIconColor(false)
                 isFavorite = false
             }
-            println(it)
         })
 
         viewModel.isRemoved.observe(viewLifecycleOwner, Observer {
             if (it) {
-/*
-                binding.favoriteImageView.setBackgroundColor(Color.RED)
-*/
                 binding.favoriteImageView.changeIconColor(false)
             }
         })
@@ -80,31 +84,11 @@ class CryptoDetailFragment(private val mContext: Context) :
             it?.let {
                 if (it) {
                     binding.favoriteImageView.changeIconColor(true)
-
                 } else {
-/*
-                    binding.favoriteImageView.changeIconColor(false)
-*/
-
                 }
             }
         })
 
-    }
-
-    fun getDetail() {
-        val data = arguments?.getString("cryptoId")
-        viewModel.isFavorite(data!!)
-        binding.progressbar.visibility = View.VISIBLE
-
-        viewModel.getCryptoDetailById(data.toString())
-        viewModel.cryptoDetail.observe(viewLifecycleOwner, Observer {
-            binding.cryptoDetail = null
-            binding.cryptoDetail = it
-            println(it.image.small.toString())
-            Glide.with(requireContext()).load(it.image.large).into(binding.imgIconImage)
-            binding.progressbar.visibility = View.INVISIBLE
-        })
     }
 
     override fun getLayoutRes(): Int {

@@ -1,22 +1,13 @@
 package com.resurrection.cryptoassistant.ui.main.market.details
 
-import android.app.Application
-import android.graphics.Color
-import android.graphics.PorterDuff
-import android.graphics.PorterDuffColorFilter
-import android.widget.ImageView
-import androidx.core.content.ContentProviderCompat
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import com.resurrection.cryptoassistant.R
-import com.resurrection.cryptoassistant.data.repository.CryptoRepository
-import com.resurrection.cryptoassistant.data.db.CryptoDatabase
 import com.resurrection.cryptoassistant.data.model.CryptoDetailItem
 import com.resurrection.cryptoassistant.data.model.FavouriteCryptoModel
+import com.resurrection.cryptoassistant.data.repository.CryptoRepository
 import com.resurrection.cryptoassistant.ui.base.BaseViewModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
@@ -43,8 +34,6 @@ class CryptoDetailViewModel @Inject constructor(val cryptoRepository: CryptoRepo
             cryptoDetail.postValue(temp)
         }
     }
-
-
 
     fun insertFavoriteCrypto(cryptoDetail: CryptoDetailItem) =
         viewModelScope.launch {
@@ -101,9 +90,7 @@ class CryptoDetailViewModel @Inject constructor(val cryptoRepository: CryptoRepo
                     }
 
                     println(it)
-                }.addOnFailureListener {
-                    isFavorite.value = false
-                }
+                }.addOnFailureListener { isFavorite.value = false }
 
         } else { // No user is signed in }
         }
