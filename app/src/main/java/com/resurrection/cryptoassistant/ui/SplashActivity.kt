@@ -25,7 +25,6 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(), Animation.Animatio
     }
 
     override fun init(savedInstanceState: Bundle?) {
-        FirebaseAuth.getInstance().signOut()
         if (FirebaseAuth.getInstance().currentUser != null) {
             loginState = true
             startActivity(Intent(this@SplashActivity, HomeActivity::class.java))

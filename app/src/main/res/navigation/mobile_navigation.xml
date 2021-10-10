@@ -42,7 +42,7 @@
         android:id="@+id/bottomSheetFragment"
         android:name="com.resurrection.cryptoassistant.ui.main.market.details.CryptoDetailFragment"
         android:label="BottomSheetFragment"
-        tools:layout="@layout/bottom_sheet_fragment">
+        tools:layout="@layout/fragment_crypto_detail">
         <argument
             android:name="coinId"
             app:argType="string" />

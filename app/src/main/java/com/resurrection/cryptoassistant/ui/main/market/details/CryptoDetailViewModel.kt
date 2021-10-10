@@ -2,12 +2,17 @@ package com.resurrection.cryptoassistant.ui.main.market.details
 
 import android.app.Application
 import android.graphics.Color
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.widget.ImageView
+import androidx.core.content.ContentProviderCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
+import com.resurrection.cryptoassistant.R
 import com.resurrection.cryptoassistant.data.repository.CryptoRepository
 import com.resurrection.cryptoassistant.data.db.CryptoDatabase
 import com.resurrection.cryptoassistant.data.model.CryptoDetailItem
@@ -30,7 +35,7 @@ class CryptoDetailViewModel @Inject constructor(val cryptoRepository: CryptoRepo
     var cryptoDetail = MutableLiveData<CryptoDetailItem>()
 
     var isFavorite = MutableLiveData<Boolean?>()
-
+    var firebaseIsSended = MutableLiveData<Boolean?>()
     var isRemoved = MutableLiveData<Boolean>()
     fun getCryptoDetailById(id: String) {
         job = CoroutineScope(Dispatchers.IO).launch {
@@ -41,7 +46,7 @@ class CryptoDetailViewModel @Inject constructor(val cryptoRepository: CryptoRepo
 
 
 
-    fun insertFavoriteCrypto(cryptoDetail: CryptoDetailItem, favoriteImageView: ImageView) =
+    fun insertFavoriteCrypto(cryptoDetail: CryptoDetailItem) =
         viewModelScope.launch {
             val user = Firebase.auth.currentUser
             if (user != null) {
@@ -57,8 +62,10 @@ class CryptoDetailViewModel @Inject constructor(val cryptoRepository: CryptoRepo
                 val myRef = database.getReference(user.uid).child("favorite")
                     .child(cryptoDetail.id).setValue(test)
                     .addOnSuccessListener {
-                        favoriteImageView.setBackgroundColor(Color.GREEN)
-                    }.addOnFailureListener { }
+                        firebaseIsSended.value = true
+                    }.addOnFailureListener {
+                        firebaseIsSended.value = false
+                    }
             } else { /*No user is signed in */
             }
 
@@ -106,4 +113,5 @@ class CryptoDetailViewModel @Inject constructor(val cryptoRepository: CryptoRepo
         super.onCleared()
         job = null
     }
+
 }

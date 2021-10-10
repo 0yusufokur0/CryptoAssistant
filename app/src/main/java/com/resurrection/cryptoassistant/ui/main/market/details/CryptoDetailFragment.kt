@@ -1,30 +1,29 @@
 package com.resurrection.cryptoassistant.ui.main.market.details
 
 import android.content.Context
-import android.graphics.Color
+import android.graphics.PorterDuff
+import android.graphics.PorterDuffColorFilter
 import android.os.Bundle
 import android.view.View
+import android.widget.ImageView
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.bumptech.glide.Glide
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
-import com.google.firebase.auth.ktx.auth
-import com.google.firebase.database.ktx.database
-import com.google.firebase.ktx.Firebase
 import com.resurrection.cryptoassistant.R
 import com.resurrection.cryptoassistant.data.model.CryptoDetailItem
-import com.resurrection.cryptoassistant.data.model.FavouriteCryptoModel
-import com.resurrection.cryptoassistant.databinding.BottomSheetFragmentBinding
+import com.resurrection.cryptoassistant.databinding.FragmentCryptoDetailBinding
 import com.resurrection.cryptoassistant.ui.base.BaseBottomSheetFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 
 @AndroidEntryPoint
 class CryptoDetailFragment(private val mContext: Context) :
-    BaseBottomSheetFragment<BottomSheetFragmentBinding>() {
+    BaseBottomSheetFragment<FragmentCryptoDetailBinding>() {
     var cryptoDetailItem: CryptoDetailItem? = null
     private val viewModel: CryptoDetailViewModel by viewModels()
-    var isFavorite:Boolean = false
+    var isFavorite: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,33 +33,60 @@ class CryptoDetailFragment(private val mContext: Context) :
     override fun init(savedInstanceState: Bundle?) {
         getDetail()
         println("detay açıldı")
-        binding.favoriteImageView.setBackgroundColor(Color.RED)
+        binding.favoriteImageView.changeIconColor(false)
         binding.favoriteImageView.setOnClickListener {
-            if (!isFavorite){
-                viewModel.insertFavoriteCrypto(binding.cryptoDetail!!,binding.favoriteImageView)
+            if (!isFavorite) {
+                viewModel.insertFavoriteCrypto(binding.cryptoDetail!!)
+                binding.favoriteImageView.changeIconColor(false)
                 println("favorilere eklendi")
                 isFavorite = true
-            }else{
+            } else {
                 viewModel.removeFavroite(binding.cryptoDetail!!.id)
+                binding.favoriteImageView.changeIconColor(true)
+
                 println("favorilerden çıkarıldı")
                 isFavorite = false
-                /*this crypto is favorite */ }
+                /*this crypto is favorite */
+            }
         }
 
         viewModel.isFavorite.observe(viewLifecycleOwner, Observer {
             if (it!!) {
+/*
                 binding.favoriteImageView.setBackgroundColor(Color.GREEN)
+*/
+                binding.favoriteImageView.changeIconColor(true)
                 isFavorite = true
             } else {
+/*
                 binding.favoriteImageView.setBackgroundColor(Color.RED)
+*/
+                binding.favoriteImageView.changeIconColor(false)
                 isFavorite = false
             }
             println(it)
         })
 
         viewModel.isRemoved.observe(viewLifecycleOwner, Observer {
-            if (it){
+            if (it) {
+/*
                 binding.favoriteImageView.setBackgroundColor(Color.RED)
+*/
+                binding.favoriteImageView.changeIconColor(false)
+            }
+        })
+
+        viewModel.firebaseIsSended.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                if (it) {
+                    binding.favoriteImageView.changeIconColor(true)
+
+                } else {
+/*
+                    binding.favoriteImageView.changeIconColor(false)
+*/
+
+                }
             }
         })
 
@@ -82,9 +108,17 @@ class CryptoDetailFragment(private val mContext: Context) :
     }
 
     override fun getLayoutRes(): Int {
-        return R.layout.bottom_sheet_fragment
+        return R.layout.fragment_crypto_detail
     }
 
+    private infix fun ImageView.changeIconColor(isFavourite: Boolean) {
+        val color = if (isFavourite) R.color.green else R.color.red
+
+        this.colorFilter = PorterDuffColorFilter(
+            ContextCompat.getColor(requireContext(), color),
+            PorterDuff.Mode.SRC_IN
+        )
+    }
 }
 
 

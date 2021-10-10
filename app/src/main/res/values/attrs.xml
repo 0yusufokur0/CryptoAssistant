@@ -4,4 +4,6 @@
     <attr name="statusBarColor" format="color"/>
     <attr name="bottomSheetBg" format="color"/>
     <attr name="authAreaBg" format="color"/>
+    <attr name="cryptoItemBg" format="color"/>
+    <attr name="boldHeadColor" format="color"/>
 </resources>

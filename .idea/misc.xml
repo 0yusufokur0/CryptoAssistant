@@ -23,6 +23,7 @@
         <entry key="app/src/main/res/layout/crypto_currency_item.xml" value="0.67" />
         <entry key="app/src/main/res/layout/fragment_categories.xml" value="0.35625" />
         <entry key="app/src/main/res/layout/fragment_crypto_currency.xml" value="0.35625" />
+        <entry key="app/src/main/res/layout/fragment_crypto_detail.xml" value="0.305982905982906" />
         <entry key="app/src/main/res/layout/fragment_dashboard.xml" value="0.29030797101449274" />
         <entry key="app/src/main/res/layout/fragment_favorite.xml" value="0.3729166666666667" />
         <entry key="app/src/main/res/layout/fragment_favorite_detail.xml" value="0.3729166666666667" />

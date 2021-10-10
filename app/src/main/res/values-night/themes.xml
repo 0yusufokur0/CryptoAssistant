@@ -13,6 +13,9 @@
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
         <!-- Customize your theme here. -->
         <item name="bottomSheetBg">#000000</item>
+        <item name="cryptoItemBg">#000000</item>
+        <item name="boldHeadColor">#D1D1D1</item>
+
     </style>
 
 

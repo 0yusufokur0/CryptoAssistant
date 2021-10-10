@@ -55,7 +55,8 @@
                     android:id="@+id/head"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="15dp">
+                    android:paddingBottom="15dp"
+                    tools:ignore="MissingConstraints">
 
                     <androidx.appcompat.widget.AppCompatTextView
                         android:id="@+id/coinNameTextView"
@@ -63,15 +64,15 @@
                         android:layout_height="wrap_content"
                         android:gravity="start"
                         android:text="@{cryptoDetail.name + ` (` + cryptoDetail.symbol + `)`}"
-                        android:textColor="@color/head_text_color"
+                        android:textColor="?attr/boldHeadColor"
                         android:textSize="20sp"
                         app:fontFamily="@font/quicksand_bold"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/favoriteImageView"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         app:layout_constraintTop_toTopOf="@id/coinNameTextView"
                         app:layout_constraintBottom_toBottomOf="@id/coinNameTextView"
                         app:layout_constraintRight_toRightOf="parent"
@@ -86,7 +87,6 @@
                         android:layout_height="55dp"
                         android:layout_marginLeft="0dp"
                         android:layout_marginTop="16dp"
-
                         app:layout_constraintBottom_toBottomOf="@id/txtAthChangePercentage"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/coinNameTextView" />
@@ -99,7 +99,7 @@
                         android:layout_marginLeft="15dp"
                         android:fontFamily="@font/quicksand_bold"
                         android:text="@{Double.toString(cryptoDetail.marketData.currentPrice.usd) + ` $`}"
-                        android:textColor="@color/head_text_color"
+                        android:textColor="?attr/boldHeadColor"
                         android:textSize="18sp"
                         app:layout_constraintBottom_toTopOf="@id/txtAthChangePercentage"
                         app:layout_constraintLeft_toRightOf="@id/imgIconImage"
@@ -124,7 +124,7 @@
                         android:layout_marginTop="10dp"
                         android:includeFontPadding="false"
                         android:text="@{Double.toString(cryptoDetail.marketData.priceChangePercentage24h) + `%`}"
-                        android:textColor="@color/content_text_color"
+                        android:textColor="?attr/boldHeadColor"
                         android:textSize="@dimen/text_size_min"
                         app:layout_constraintBottom_toBottomOf="@id/imgIconImage"
                         app:layout_constraintLeft_toLeftOf="@id/txtCoinCurrentPrice"
@@ -137,7 +137,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/margin_min"
                         android:text="@string/coin_lowest_price_24h"
-                        android:textColor="@color/content_text_color"
+                        android:textColor="?attr/boldHeadColor"
                         android:textSize="12sp"
                         app:layout_constraintBottom_toBottomOf="@id/txtCoinLow"
                         app:layout_constraintEnd_toStartOf="@id/txtCoinLow"
@@ -150,7 +150,7 @@
                         android:layout_marginTop="@dimen/margin_min"
                         android:layout_marginEnd="@dimen/margin_big"
                         android:text="@{cryptoDetail.marketData.lowestPrice24h.usd + ` $`}"
-                        android:textColor="@color/content_text_color"
+                        android:textColor="?attr/boldHeadColor"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@id/imgIconImage" />
 
@@ -160,7 +160,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginEnd="@dimen/margin_min"
                         android:text="@string/coin_highest_price_24h"
-                        android:textColor="@color/content_text_color"
+                        android:textColor="?attr/boldHeadColor"
                         android:textSize="12dp"
                         app:layout_constraintBottom_toBottomOf="@id/txtCoinHigh"
                         app:layout_constraintEnd_toStartOf="@id/txtCoinHigh"
@@ -174,7 +174,7 @@
                         android:layout_marginEnd="@dimen/margin_big"
                         android:layout_marginBottom="@dimen/margin_min"
                         android:text="@{cryptoDetail.marketData.highestPrice24h.usd + ` $`}"
-                        android:textColor="@color/content_text_color"
+                        android:textColor="?attr/boldHeadColor"
                         app:layout_constraintBottom_toBottomOf="@id/imgIconImage"
                         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -197,10 +197,11 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="15dp"
                         android:text="Hashing Algorithm"
-                        android:textColor="@color/head_text_color"
+                        android:textColor="?attr/boldHeadColor"
                         app:fontFamily="@font/quicksand_bold"
                         app:layout_constraintLeft_toLeftOf="@id/head"
-                        app:layout_constraintTop_toBottomOf="@id/head" />
+                        app:layout_constraintTop_toBottomOf="@id/head"
+                        tools:ignore="NotSibling" />
 
                     <TextView
                         android:id="@+id/txtCoinHashingAlgorithm"
@@ -209,9 +210,8 @@
                         android:layout_marginTop="@dimen/margin_min"
                         android:layout_marginEnd="@dimen/margin_min"
                         android:layout_marginBottom="@dimen/margin_min"
-                        android:background="@color/white"
                         android:text="@{cryptoDetail.hashingAlgorithm}"
-                        android:textColor="@color/content_text_color"
+                        android:textColor="?attr/boldHeadColor"
                         app:layout_constraintLeft_toLeftOf="@id/hashingAlgorithm"
                         app:layout_constraintTop_toBottomOf="@id/hashingAlgorithm" />
 
@@ -224,7 +224,7 @@
                         android:fontFamily="@font/quicksand_bold"
                         android:maxLines="10"
                         android:text="Description"
-                        android:textColor="@color/head_text_color"
+                        android:textColor="?attr/boldHeadColor"
                         app:layout_constraintLeft_toLeftOf="@id/txtCoinHashingAlgorithm"
                         app:layout_constraintTop_toBottomOf="@id/txtCoinHashingAlgorithm" />
 
@@ -236,7 +236,7 @@
                         android:layout_marginEnd="16dp"
 
                         android:text="@{Html.fromHtml(cryptoDetail.description.en ?? ``)}"
-                        android:textColor="@color/content_text_color"
+                        android:textColor="?attr/boldHeadColor"
                         app:layout_constraintLeft_toLeftOf="@id/txtDescription"
                         app:layout_constraintRight_toRightOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/txtDescription" />
