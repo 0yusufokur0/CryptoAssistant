@@ -24,16 +24,25 @@ class FavoriteDetailFragment : BaseBottomSheetFragment<FragmentFavoriteDetailBin
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme)
-        this.childFragmentManager
-            .beginTransaction().setCustomAnimations(R.anim.right_to_left_second, R.anim.right_to_left_first)
-            .replace(R.id.chartFrameLayout, CryptoChartFragment())
-            .addToBackStack(null)
-            .commit()
+        /*              val data = arguments?.getString("cryptoId")
+      val bundle = Bundle()
+      bundle.putString("cryptoId", cmm.cryptoId.toString())
+      cryptoDetail!!.arguments = bundle*/
+
     }
     override fun init(savedInstanceState: Bundle?) {
         val data = arguments?.getString("cryptoId")
         viewModel.getCryptoDetailById(data!!)
+        val bundle = Bundle()
+        bundle.putString("cryptoId",data)
+        var fragment = CryptoChartFragment()
+        fragment!!.arguments =bundle
 
+        this.childFragmentManager
+            .beginTransaction().setCustomAnimations(R.anim.right_to_left_second, R.anim.right_to_left_first)
+            .replace(R.id.chartFrameLayout, fragment)
+            .addToBackStack(null)
+            .commit()
         viewModel.cryptoDetail.observe(viewLifecycleOwner, Observer {
             binding.cryptoDetail = it
             viewModel.getCryptoByFirebase(data!!)
