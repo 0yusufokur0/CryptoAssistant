@@ -21,7 +21,7 @@ class CryptoChartViewModel  @Inject constructor(private val cryptoRepository: Cr
 
     var job: Job? = null
 
-    var cryptoChart = MutableLiveData<List<CryptoChartModel>>()
+    var cryptoChart = MutableLiveData<CryptoChartModel>()
 
 
     fun getCryptoChartById(id: String) {

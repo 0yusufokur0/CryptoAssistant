@@ -17,7 +17,8 @@ interface CryptoApiService {
     suspend fun getCryptoById(@Path("id") id: String): CryptoDetailItem
 
     @GET("coins/{id}/market_chart?vs_currency=usd&days=30")
-    suspend fun getCryptoChartByID(@Path("id") id: String): List<CryptoChartModel>
+    suspend fun getCryptoChartByID(@Path("id") id: String):CryptoChartModel
+
 
 
     /*https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=30

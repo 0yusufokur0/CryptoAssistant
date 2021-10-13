@@ -18,6 +18,7 @@ import com.resurrection.cryptoassistant.ui.base.BaseFragment;
 import com.resurrection.cryptoassistant.ui.main.favorite.favoritedetail.FavoriteDetailFragment;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -55,11 +56,12 @@ public class CryptoChartFragment extends BaseFragment<FragmentCryptoChartBinding
         cryptoDetail!!.arguments = bundle*/
         String data = getArguments().getString("cryptoId");
 
-/*
         viewModel.getCryptoChartById(data);
-*/
 
         GraphView graph = requireView().findViewById(R.id.graph);
+        graph.getViewport().setScalable(true);
+        graph.getViewport().setScalableY(true);
+/*
         LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[]{
                 new DataPoint(0, 1),
                 new DataPoint(1, 5),
@@ -68,8 +70,42 @@ public class CryptoChartFragment extends BaseFragment<FragmentCryptoChartBinding
                 new DataPoint(4, 6)
         });
         graph.addSeries(series);
+*/
 
         viewModel.getCryptoChart().observe(getViewLifecycleOwner(), cryptoChartModelList-> {
+
+            DataPoint[] dataPoints = new DataPoint[cryptoChartModelList.getPrices().size()];
+     /*       for (List<Double> d:cryptoChartModelList.getPrices()) {
+                System.out.println(d.get(0));
+
+            }*/
+
+            for (int i = 0; i < cryptoChartModelList.getPrices().size(); i++) {
+                List<Double> doubleList = cryptoChartModelList.getPrices().get(i);
+                dataPoints[i] = new DataPoint(doubleList.get(0),doubleList.get(1));
+            }
+
+            LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(dataPoints);
+            graph.addSeries(series);
+
+        });
+
+
+    }
+    public Context requirceContext() {
+        Context context = getContext();
+        if (context == null) {
+            throw new IllegalStateException("Fragment " + this + " not attached to a context.");
+        }
+        return context;
+    }
+
+
+}
+
+/*
+            System.out.println(cryptoChartModelList.toString());
+*/
 /*            LineGraphSeries<DataPoint> mySeries; *//*= new LineGraphSeries<DataPoint>(new DataPoint[]{
             });*//*
 
@@ -92,17 +128,3 @@ public class CryptoChartFragment extends BaseFragment<FragmentCryptoChartBinding
                 new DataPoint(4, 6)
         });
         graph.addSeries(series);*/
-        });
-
-
-    }
-    public Context requirceContext() {
-        Context context = getContext();
-        if (context == null) {
-            throw new IllegalStateException("Fragment " + this + " not attached to a context.");
-        }
-        return context;
-    }
-
-
-}
