@@ -8,6 +8,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.resurrection.cryptoassistant.R
 import com.resurrection.cryptoassistant.databinding.FragmentFavoriteDetailBinding
 import com.resurrection.cryptoassistant.ui.base.BaseBottomSheetFragment
+import com.resurrection.cryptoassistant.ui.main.favorite.chart.CryptoChartFragment
 import com.resurrection.cryptoassistant.util.setCryptoPriceBackground
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
@@ -23,7 +24,11 @@ class FavoriteDetailFragment : BaseBottomSheetFragment<FragmentFavoriteDetailBin
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme)
-
+        this.childFragmentManager
+            .beginTransaction().setCustomAnimations(R.anim.right_to_left_second, R.anim.right_to_left_first)
+            .replace(R.id.chartFrameLayout, CryptoChartFragment())
+            .addToBackStack(null)
+            .commit()
     }
     override fun init(savedInstanceState: Bundle?) {
         val data = arguments?.getString("cryptoId")
