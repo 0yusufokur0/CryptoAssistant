@@ -3,8 +3,11 @@ package com.resurrection.cryptoassistant.ui.main.market.cryptocurrency
 import android.os.Bundle
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import com.resurrection.cryptoassistant.BR
 import com.resurrection.cryptoassistant.R
+import com.resurrection.cryptoassistant.ui.base.BaseAdapter
 import com.resurrection.cryptoassistant.data.model.CryptoMarketModel
+import com.resurrection.cryptoassistant.databinding.CryptoCurrencyItemBinding
 import com.resurrection.cryptoassistant.databinding.FragmentCryptoCurrencyBinding
 import com.resurrection.cryptoassistant.ui.base.BaseFragment
 import com.resurrection.cryptoassistant.ui.main.market.details.CryptoDetailFragment
@@ -26,15 +29,27 @@ class CryptoCurrencyFragment : BaseFragment<FragmentCryptoCurrencyBinding>() {
     }
 
     override fun init(savedInstanceState: Bundle?) {
+
+
         cryptoDetail = CryptoDetailFragment(requireContext())
         viewModel.getAllCrypto()
         viewModel.allCrypto.observe(viewLifecycleOwner, Observer {
             it?.let {
+/*
                 adapter = CryptoCurrencyAdapter(it as ArrayList<CryptoMarketModel>, this::adapterOnCLick)
-                binding.cryptoCurrencyRecyclerView.adapter = adapter
+*/
+
+
+                var test = BaseAdapter<CryptoMarketModel, CryptoCurrencyItemBinding>(R.layout.crypto_currency_item,it as ArrayList<CryptoMarketModel>,BR.crypto,this::adapterOnCLick)
+
+                binding.cryptoCurrencyRecyclerView.adapter = test
             }
         })
+
+
     }
+
+
 
     fun adapterOnCLick(cmm: CryptoMarketModel) {
         val bundle = Bundle()

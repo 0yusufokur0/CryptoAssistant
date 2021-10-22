@@ -16,7 +16,7 @@ abstract class BaseViewModel() : ViewModel(),
     private val job = Job()
 
     override val coroutineContext: CoroutineContext
-        get() = job + Dispatchers.Main
+        get() = job + Dispatchers.IO
 
     override fun onCleared() {
         super.onCleared()

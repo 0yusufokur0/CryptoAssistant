@@ -111,6 +111,8 @@ class FavoriteDetailViewModel @Inject constructor(val cryptoRepository: CryptoRe
 
     override fun onCleared() {
         super.onCleared()
+/*
         job = null
+*/
     }
 }

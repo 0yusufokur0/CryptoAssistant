@@ -98,7 +98,10 @@ class CryptoDetailViewModel @Inject constructor(val cryptoRepository: CryptoRepo
 
     override fun onCleared() {
         super.onCleared()
+        job?.cancel()
+/*
         job = null
+*/
     }
 
 }

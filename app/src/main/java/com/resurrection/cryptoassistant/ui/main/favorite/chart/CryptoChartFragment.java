@@ -10,6 +10,9 @@ import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
 
 import com.jjoe64.graphview.GraphView;
+import com.jjoe64.graphview.GridLabelRenderer;
+import com.jjoe64.graphview.LegendRenderer;
+import com.jjoe64.graphview.helper.StaticLabelsFormatter;
 import com.jjoe64.graphview.series.DataPoint;
 import com.jjoe64.graphview.series.LineGraphSeries;
 import com.resurrection.cryptoassistant.R;
@@ -61,6 +64,31 @@ public class CryptoChartFragment extends BaseFragment<FragmentCryptoChartBinding
         GraphView graph = requireView().findViewById(R.id.graph);
         graph.getViewport().setScalable(true);
         graph.getViewport().setScalableY(true);
+
+/*        StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graph);
+        String[] dates = new String[]{"1","2","3","4"};
+        staticLabelsFormatter.setHorizontalLabels(dates);
+
+        graph.getViewport().setMinX(0);
+        graph.getViewport().setMaxX(dates.length-1);*/
+
+/*        GridLabelRenderer renderer = graph.getGridLabelRenderer();
+        renderer.setHorizontalLabelsAngle(5);*/
+/*
+        graph.getGraphViewStyle().setNumHorizontalLabels(5);
+*/
+
+/*               graph.getLegendRenderer().setVisible(true);
+        graph.getLegendRenderer().setAlign(LegendRenderer.LegendAlign.TOP);
+
+        //Підписи осей
+        GridLabelRenderer gridLabel = graph.getGridLabelRenderer();
+        gridLabel.setHorizontalAxisTitle("X Axis Title");
+        gridLabel.setVerticalAxisTitle("Y Axis Title");*/
+/*        StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graph);
+        staticLabelsFormatter.setHorizontalLabels(new String[] {"old", "middle", "new"});
+        staticLabelsFormatter.setVerticalLabels(new String[] {"low", "middle", "high"});
+        graph.getGridLabelRenderer().setLabelFormatter(staticLabelsFormatter);*/
 /*
         LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(new DataPoint[]{
                 new DataPoint(0, 1),
