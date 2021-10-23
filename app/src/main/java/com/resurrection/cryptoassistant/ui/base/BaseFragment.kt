@@ -13,11 +13,12 @@ import androidx.lifecycle.LifecycleObserver
 
 abstract class BaseFragment<VDB : ViewDataBinding> : Fragment(), LifecycleObserver {
 
-    lateinit var binding: VDB
+
+    private var _binding: VDB? = null
+    val binding get() = _binding!!
 
     @LayoutRes
     abstract fun getLayoutRes(): Int
-
     abstract fun init(savedInstanceState: Bundle?)
 
     @CallSuper
@@ -26,8 +27,8 @@ abstract class BaseFragment<VDB : ViewDataBinding> : Fragment(), LifecycleObserv
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        binding = DataBindingUtil.inflate(inflater, getLayoutRes(), container, false)
-        return binding.root
+        _binding = DataBindingUtil.inflate(inflater, getLayoutRes(), container, false)
+        return _binding!!.root
     }
 
     @CallSuper
@@ -36,5 +37,9 @@ abstract class BaseFragment<VDB : ViewDataBinding> : Fragment(), LifecycleObserv
         init(savedInstanceState)
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
 
 }

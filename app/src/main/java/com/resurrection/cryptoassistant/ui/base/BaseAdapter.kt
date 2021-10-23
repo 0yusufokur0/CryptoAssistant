@@ -6,11 +6,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.RecyclerView
 
-class BaseAdapter<T, viewDataBinding : ViewDataBinding>(
-    private var layoutResource: Int,
-    var list: ArrayList<T>,
-    private var itemId: Int,
-    private var onItemClick: (T) -> Unit
+open class BaseAdapter<T, viewDataBinding : ViewDataBinding>(
+    var layoutResource: Int,
+    var currentList: ArrayList<T>,
+    var itemId: Int,
+    var onItemClick: (T) -> Unit
 ) : RecyclerView.Adapter<BaseAdapter.BaseHolder<T>>() {
 
     lateinit var binding: viewDataBinding
@@ -26,10 +26,9 @@ class BaseAdapter<T, viewDataBinding : ViewDataBinding>(
     }
 
     override fun onBindViewHolder(holder: BaseHolder<T>, position: Int) {
-        holder.bind(list[position])
+        holder.bind(currentList[position])
     }
-
-    override fun getItemCount(): Int = list.size
+    override fun getItemCount(): Int = currentList.size
 
     class BaseHolder<T>(private var binding: ViewDataBinding, private var itemId: Int,var onItemClick: (T) -> Unit) :
         RecyclerView.ViewHolder(binding.root) {

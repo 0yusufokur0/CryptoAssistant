@@ -44,7 +44,7 @@ class FavoriteDetailFragment : BaseBottomSheetFragment<FragmentFavoriteDetailBin
             .addToBackStack(null)
             .commit()
         viewModel.cryptoDetail.observe(viewLifecycleOwner, Observer {
-            binding.cryptoDetail = it
+            binding.cryptoDetail = it.data
             viewModel.getCryptoByFirebase(data!!)
             val sdf = SimpleDateFormat("dd/M/yyyy hh:mm")
             val currentDate = sdf.format(Date())

@@ -23,20 +23,14 @@ import com.resurrection.cryptoassistant.ui.main.favorite.favoritedetail.Favorite
 import java.util.ArrayList;
 import java.util.List;
 
+import dagger.Provides;
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
 public class CryptoChartFragment extends BaseFragment<FragmentCryptoChartBinding> {
 
-/*
-    private CryptoChartViewModel viewModel = ViewModelProviders.of(this).get(CryptoChartViewModel.class);
-*/
-
     private CryptoChartViewModel viewModel;/* = ViewModelProviders.of(getParentFragment().requireActivity()).get(CryptoChartViewModel.class);*/
 
-    /*
-        viewModel = ViewModelProviders(this).get(CryptoChartViewModel::clas);
-    */
     @Override
     public int getLayoutRes() {
         return R.layout.fragment_crypto_chart;
@@ -53,10 +47,6 @@ public class CryptoChartFragment extends BaseFragment<FragmentCryptoChartBinding
         super.onViewCreated(view, savedInstanceState);
         viewModel = ViewModelProviders.of(this).get(CryptoChartViewModel.class);
 
-  /*              val data = arguments?.getString("cryptoId")
-        val bundle = Bundle()
-        bundle.putString("cryptoId", cmm.cryptoId.toString())
-        cryptoDetail!!.arguments = bundle*/
         String data = getArguments().getString("cryptoId");
 
         viewModel.getCryptoChartById(data);
@@ -100,13 +90,17 @@ public class CryptoChartFragment extends BaseFragment<FragmentCryptoChartBinding
         graph.addSeries(series);
 */
 
-        viewModel.getCryptoChart().observe(getViewLifecycleOwner(), cryptoChartModelList-> {
+
+        //TODO buranın altı
+
+/*        viewModel.getCryptoChart().observe(getViewLifecycleOwner(), cryptoChartModelList-> {
+
 
             DataPoint[] dataPoints = new DataPoint[cryptoChartModelList.getPrices().size()];
-     /*       for (List<Double> d:cryptoChartModelList.getPrices()) {
+     *//*       for (List<Double> d:cryptoChartModelList.getPrices()) {
                 System.out.println(d.get(0));
 
-            }*/
+            }*//*
 
             for (int i = 0; i < cryptoChartModelList.getPrices().size(); i++) {
                 List<Double> doubleList = cryptoChartModelList.getPrices().get(i);
@@ -116,7 +110,7 @@ public class CryptoChartFragment extends BaseFragment<FragmentCryptoChartBinding
             LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(dataPoints);
             graph.addSeries(series);
 
-        });
+        });*/
 
 
     }

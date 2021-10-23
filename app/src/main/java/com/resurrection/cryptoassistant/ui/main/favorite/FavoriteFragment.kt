@@ -41,7 +41,7 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
 
         viewModel.allFavoriteCrypto.observe(viewLifecycleOwner, Observer {
             it?.let {
-                if (it.size != 0) {
+                if (it.data?.size != 0) {
                     var adapter = CryptoCurrencyAdapter(
                         it as ArrayList<CryptoMarketModel>,
                         this::adapterOnCLick
@@ -55,7 +55,7 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
         })
 
         viewModel.cryptoDetail.observe(viewLifecycleOwner, Observer {
-            it?.let {
+            it?.data?.let {
                 var cmm = CryptoMarketModel(
                     it.id,
                     it.marketData.currentPrice.usd,

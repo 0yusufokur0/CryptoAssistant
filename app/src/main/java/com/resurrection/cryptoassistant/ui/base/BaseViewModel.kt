@@ -9,14 +9,11 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlin.coroutines.CoroutineContext
 
-abstract class BaseViewModel() : ViewModel(),
-
-    CoroutineScope {
+abstract class BaseViewModel : ViewModel(), CoroutineScope {
 
     private val job = Job()
 
-    override val coroutineContext: CoroutineContext
-        get() = job + Dispatchers.IO
+    override val coroutineContext: CoroutineContext get() = job + Dispatchers.IO
 
     override fun onCleared() {
         super.onCleared()

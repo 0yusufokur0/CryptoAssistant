@@ -22,9 +22,5 @@ abstract class BaseActivity<viewDataBinding : ViewDataBinding> : AppCompatActivi
         init(savedInstanceState)
     }
 
-    fun getApp(): App {
-        return application as App
-    }
-
-
+    fun getApp(): App = application as App
 }

@@ -16,19 +16,10 @@ class ViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
-            0 -> {
-                CryptoCurrencyFragment()
-            }
-            1 -> {
-                CategoriesFragment()
-            }
-            2 -> {
-                SimulatorFragment()
-            }
-            else -> {
-                Fragment()
-            }
-
+            0 -> CryptoCurrencyFragment()
+            1 -> CategoriesFragment()
+            2 -> SimulatorFragment()
+            else -> Fragment()
         }
     }
 }

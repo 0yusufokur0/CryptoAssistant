@@ -58,9 +58,9 @@ class CryptoDetailFragment(private val mContext: Context) :
     fun setViewModels() {
         viewModel.cryptoDetail.observe(viewLifecycleOwner, Observer {
             binding.cryptoDetail = null
-            binding.cryptoDetail = it
-            println(it.image.small.toString())
-            Glide.with(requireContext()).load(it.image.large).into(binding.imgIconImage)
+            binding.cryptoDetail = it.data
+            println(it.data?.image?.small.toString())
+            Glide.with(requireContext()).load(it.data?.image?.large).into(binding.imgIconImage)
             binding.progressbar.visibility = View.INVISIBLE
         })
 

@@ -20,7 +20,6 @@ class CryptoCurrencyFragment : BaseFragment<FragmentCryptoCurrencyBinding>() {
     private var cryptoDetail: CryptoDetailFragment? = null
     private val BASE_URL = "https://api.coingecko.com/api/v3/"
     private var cryptoModels: ArrayList<CryptoMarketModel>? = null
-    private var job: Job? = null
     private var adapter: CryptoCurrencyAdapter? = null
     val viewModel: CryptoCurrencyViewModel by viewModels()
 
@@ -29,27 +28,14 @@ class CryptoCurrencyFragment : BaseFragment<FragmentCryptoCurrencyBinding>() {
     }
 
     override fun init(savedInstanceState: Bundle?) {
-
-
         cryptoDetail = CryptoDetailFragment(requireContext())
         viewModel.getAllCrypto()
         viewModel.allCrypto.observe(viewLifecycleOwner, Observer {
             it?.let {
-/*
-                adapter = CryptoCurrencyAdapter(it as ArrayList<CryptoMarketModel>, this::adapterOnCLick)
-*/
-
-
-                var test = BaseAdapter<CryptoMarketModel, CryptoCurrencyItemBinding>(R.layout.crypto_currency_item,it as ArrayList<CryptoMarketModel>,BR.crypto,this::adapterOnCLick)
-
-                binding.cryptoCurrencyRecyclerView.adapter = test
+                binding.cryptoCurrencyRecyclerView.adapter = BaseAdapter<CryptoMarketModel, CryptoCurrencyItemBinding>(R.layout.crypto_currency_item,it.data as ArrayList<CryptoMarketModel>,BR.crypto,this::adapterOnCLick)
             }
         })
-
-
     }
-
-
 
     fun adapterOnCLick(cmm: CryptoMarketModel) {
         val bundle = Bundle()

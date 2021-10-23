@@ -7,23 +7,17 @@ import com.resurrection.cryptoassistant.data.model.CryptoMarketModel
 import io.reactivex.Observable
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.Response
 
 interface CryptoApiService {
 
     @GET("coins/markets?vs_currency=usd")
-    suspend fun getAllCrypto(): List<CryptoMarketModel>
+    suspend fun getAllCrypto(): Response<List<CryptoMarketModel>>
 
     @GET("coins/{id}")
-    suspend fun getCryptoById(@Path("id") id: String): CryptoDetailItem
+    suspend fun getCryptoById(@Path("id") id: String): Response<CryptoDetailItem>
 
     @GET("coins/{id}/market_chart?vs_currency=usd&days=30")
-    suspend fun getCryptoChartByID(@Path("id") id: String):CryptoChartModel
+    suspend fun getCryptoChartByID(@Path("id") id: String):Response<CryptoChartModel>
 
-
-
-    /*https://api.coingecko.com/api/v3/coins/bitcoin/market_chart?vs_currency=usd&days=30
-*/
-
-/*    @GET("coins/{id}")
-    fun getCryptoDetailById(@Path("id") id: String): Observable<CryptoDetailItem>*/
 }
