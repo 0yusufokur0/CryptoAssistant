@@ -7,13 +7,10 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import com.resurrection.cryptoassistant.data.model.CryptoDetailItem
 import com.resurrection.cryptoassistant.data.model.FavouriteCryptoModel
-import com.resurrection.cryptoassistant.data.repository.CryptoRepository
 import com.resurrection.cryptoassistant.data.repository.TestRepository
 import com.resurrection.cryptoassistant.ui.base.BaseViewModel
 import com.resurrection.cryptoassistant.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
@@ -27,23 +24,26 @@ import javax.inject.Inject
 @HiltViewModel
 class CryptoDetailViewModel @Inject constructor(val cryptoRepository: TestRepository) :
     BaseViewModel() {
-    var job: Job? = null
-    var cryptoDetail = MutableLiveData<Resource<CryptoDetailItem>>()
 
-    var isFavorite = MutableLiveData<Boolean?>()
-    var firebaseIsSended = MutableLiveData<Boolean?>()
-    var isRemoved = MutableLiveData<Boolean>()
-    fun getCryptoDetailById(id: String) {
-        job = CoroutineScope(Dispatchers.IO).launch {
-            cryptoRepository.getCryptoDetailById(id)
-                .onStart {
+    private var _cryptoDetail = MutableLiveData<Resource<CryptoDetailItem>>()
+    private var _isFavorite = MutableLiveData<Boolean?>()
+    private var _firebaseIsSended = MutableLiveData<Boolean?>()
+    private var _isRemoved = MutableLiveData<Boolean>()
 
-                }.catch {
+    var cryptoDetail : MutableLiveData<Resource<CryptoDetailItem>> = _cryptoDetail
+    var isFavorite : MutableLiveData<Boolean?> = _isFavorite
+    var firebaseIsSended : MutableLiveData<Boolean?> = _firebaseIsSended
+    var isRemoved : MutableLiveData<Boolean> = _isRemoved
 
-                }.collect {
-                    cryptoDetail.postValue(it)
-                }
-        }
+    fun getCryptoDetailById(id: String) = viewModelScope.launch {
+        cryptoRepository.getCryptoDetailById(id)
+            .onStart {
+                // Loading Animation
+            }.catch {
+                // fail load
+            }.collect {
+                cryptoDetail.postValue(it)
+            }
     }
 
     fun insertFavoriteCrypto(cryptoDetail: CryptoDetailItem) {

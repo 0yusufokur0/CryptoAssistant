@@ -1,9 +1,9 @@
 package com.resurrection.cryptoassistant.ui.main.favorite
 
 import android.app.Application
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.resurrection.cryptoassistant.data.repository.CryptoRepository
 import com.resurrection.cryptoassistant.data.model.CryptoDetailItem
 import com.resurrection.cryptoassistant.data.model.CryptoMarketModel
 import com.resurrection.cryptoassistant.data.repository.TestRepository
@@ -22,30 +22,31 @@ import javax.inject.Inject
 @HiltViewModel
 class FavoriteViewModel @Inject constructor(private val cryptoRepository: TestRepository) :
     BaseViewModel() {
+    private var _cryptoDetail = MutableLiveData<Resource<CryptoDetailItem>>()
+    private var _allFavoriteCrypto = MutableLiveData<Resource<List<CryptoMarketModel>>>()
 
-    var cryptoDetail = MutableLiveData<Resource<CryptoDetailItem>>()
-
-    var allFavoriteCrypto = MutableLiveData<Resource<List<CryptoMarketModel>>>()
+    var cryptoDetail :LiveData<Resource<CryptoDetailItem>> = _cryptoDetail
+    var allFavoriteCrypto : LiveData<Resource<List<CryptoMarketModel>>> = _allFavoriteCrypto
 
     fun getCryptoDetailById(id: String) = viewModelScope.launch{
         cryptoRepository.getCryptoDetailById(id)
             .onStart {
-
+                // Loading Animation
             }.catch {
-
+                // show fail load
             }.collect {
-                cryptoDetail.postValue(it)
+                _cryptoDetail.postValue(it)
             }
     }
 
     fun getAllFavoriteCrypto() = viewModelScope.launch {
         cryptoRepository.getCryptoFavorite()
             .onStart {
-
+                // Loading Animation
             }.catch {
-
+                // show fail load
             }.collect {
-                allFavoriteCrypto.value = it
+                _allFavoriteCrypto.value = it
             }
 
     }

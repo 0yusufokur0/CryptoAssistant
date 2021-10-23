@@ -10,25 +10,17 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class MarketFragment : BaseFragment<FragmentMarketBinding>() {
 
-    override fun getLayoutRes(): Int {
-        return R.layout.fragment_market
-    }
+    override fun getLayoutRes(): Int = R.layout.fragment_market
 
     override fun init(savedInstanceState: Bundle?) {
-        val adapter = ViewPagerAdapter(childFragmentManager ,lifecycle)
-        binding.viewPager2.adapter = adapter
 
-        TabLayoutMediator(binding.tabLayout,binding.viewPager2){tab,position->
-            when(position){
-                0->{
-                    tab.text="CRYPTO CURRENCY"
-                }
-                1->{
-                    tab.text="CATEGORIES"
-                }
-                2->{
-                    tab.text="SIMULATOR"
-                }
+        binding.viewPager2.adapter = ViewPagerAdapter(childFragmentManager, lifecycle)
+
+        TabLayoutMediator(binding.tabLayout, binding.viewPager2) { tab, position ->
+            when (position) {
+                0 -> tab.text = "CRYPTO CURRENCY"
+                1 -> tab.text = "CATEGORIES"
+                2 -> tab.text = "SIMULATOR"
             }
         }.attach()
     }

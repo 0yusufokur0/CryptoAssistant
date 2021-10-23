@@ -7,11 +7,7 @@ import com.resurrection.cryptoassistant.ui.base.BaseFragment
 
 class SupportFragment : BaseFragment<FragmentSupportBinding>() {
 
-    override fun getLayoutRes(): Int {
-        return R.layout.fragment_support
-    }
+    override fun getLayoutRes(): Int = R.layout.fragment_support
 
-    override fun init(savedInstanceState: Bundle?) {
-    }
-
+    override fun init(savedInstanceState: Bundle?) { }
 }

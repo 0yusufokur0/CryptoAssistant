@@ -3,12 +3,12 @@ package com.resurrection.cryptoassistant.ui.main.favorite.favoritedetail
 import android.app.Application
 import android.graphics.Color
 import android.widget.ImageView
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
-import com.resurrection.cryptoassistant.data.repository.CryptoRepository
 import com.resurrection.cryptoassistant.data.db.CryptoDatabase
 import com.resurrection.cryptoassistant.data.model.CryptoDetailItem
 import com.resurrection.cryptoassistant.data.model.FavouriteCryptoModel
@@ -25,16 +25,19 @@ import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
 @HiltViewModel
 class FavoriteDetailViewModel @Inject constructor(val cryptoRepository: TestRepository) :
     BaseViewModel() {
-    var job: Job? = null
-    var cryptoDetail = MutableLiveData<Resource<CryptoDetailItem>>()
-    var cryptoFromFirebase = MutableLiveData<FavouriteCryptoModel>()
-    var isFavorite = MutableLiveData<Boolean?>()
+    private var _cryptoDetail = MutableLiveData<Resource<CryptoDetailItem>>()
+    private var _cryptoFromFirebase = MutableLiveData<FavouriteCryptoModel>()
+    private var _isFavorite = MutableLiveData<Boolean?>()
+    private var _isRemoved = MutableLiveData<Boolean>()
 
-    var isRemoved = MutableLiveData<Boolean>()
+    val cryptoDetail : LiveData<Resource<CryptoDetailItem>> = _cryptoDetail
+    val cryptoFromFirebase : LiveData<FavouriteCryptoModel>  = _cryptoFromFirebase
+    val isFavorite : LiveData<Boolean?> = _isFavorite
+    val isRemoved : LiveData<Boolean> = _isRemoved
+    private val user = Firebase.auth.currentUser
 
     fun getCryptoDetailById(id: String) = viewModelScope.launch {
         cryptoRepository.getCryptoDetailById(id)
@@ -43,18 +46,17 @@ class FavoriteDetailViewModel @Inject constructor(val cryptoRepository: TestRepo
             }.catch {
 
             }.collect {
-                cryptoDetail.postValue(it)
+                _cryptoDetail.postValue(it)
             }
 
     }
     fun getCryptoByFirebase(id:String){
-        val user = Firebase.auth.currentUser
         if (user != null) {
             val database = Firebase.database
             val myRef = database.getReference(user.uid).child("favorite")
                 .child(id).get()
                 .addOnSuccessListener {
-                    cryptoFromFirebase.value = it.getValue(FavouriteCryptoModel::class.java)
+                    _cryptoFromFirebase.value = it.getValue(FavouriteCryptoModel::class.java)
 
                 }.addOnFailureListener { }
         } else { /*No user is signed in */
@@ -63,7 +65,6 @@ class FavoriteDetailViewModel @Inject constructor(val cryptoRepository: TestRepo
 
     fun insertFavoriteCrypto(cryptoDetail: CryptoDetailItem, favoriteImageView: ImageView) =
         viewModelScope.launch {
-            val user = Firebase.auth.currentUser
             if (user != null) {
                 val test = FavouriteCryptoModel(
                     cryptoDetail.id,
@@ -89,30 +90,29 @@ class FavoriteDetailViewModel @Inject constructor(val cryptoRepository: TestRepo
             val myRef = database.getReference(user.uid).child("favorite")
                 .child(id).setValue(null)
                 .addOnSuccessListener {
-                    isRemoved.value = true
+                    _isRemoved.value = true
                 }.addOnFailureListener {
-                    isRemoved.value = false
+                    _isRemoved.value = false
                 }
         } else { /*No user is signed in */
         }
     }
 
     fun isFavorite(checkId: String) {
-        val user = Firebase.auth.currentUser
         if (user != null) {
             val database = Firebase.database
             val myRef = database.getReference(user.uid).child("favorite")
                 .child(checkId).get().addOnSuccessListener {
                     if (it.value == null) {
-                        isFavorite.value = false
+                        _isFavorite.value = false
                         println(it)
                     } else {
-                        isFavorite.value = true
+                        _isFavorite.value = true
                     }
 
                     println(it)
                 }.addOnFailureListener {
-                    isFavorite.value = false
+                    _isFavorite.value = false
                 }
 
         } else { // No user is signed in }

@@ -8,7 +8,6 @@ import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.resurrection.cryptoassistant.R
 import com.resurrection.cryptoassistant.databinding.ActivityHomeBinding
 import com.resurrection.cryptoassistant.ui.base.BaseActivity
@@ -18,9 +17,7 @@ import dagger.hilt.android.AndroidEntryPoint
 class HomeActivity : BaseActivity<ActivityHomeBinding>() {
     private lateinit var appBarConfiguration: AppBarConfiguration
 
-    override fun getLayoutRes(): Int {
-        return R.layout.activity_home
-    }
+    override fun getLayoutRes(): Int = R.layout.activity_home
 
     override fun init(savedInstanceState: Bundle?) {
         setupBottomNavBar()
@@ -29,11 +26,7 @@ class HomeActivity : BaseActivity<ActivityHomeBinding>() {
     private fun setupBottomNavBar() {
         val navController = findNavController(R.id.nav_host_fragment_activity_home)
         val appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.navigation_market,
-                R.id.navigation_favorite,
-                R.id.navigation_support
-            )
+            setOf(R.id.navigation_market, R.id.navigation_favorite, R.id.navigation_support)
         )
         setupActionBarWithNavController(navController, appBarConfiguration)
         binding.navView.setupWithNavController(navController)

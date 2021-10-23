@@ -55,6 +55,27 @@ public class CryptoChartFragment extends BaseFragment<FragmentCryptoChartBinding
         graph.getViewport().setScalable(true);
         graph.getViewport().setScalableY(true);
 
+/*        viewModel.getCryptoChart().observe(getViewLifecycleOwner(), cryptoChartModelList-> {
+            DataPoint[] dataPoints = new DataPoint[cryptoChartModelList.getData().getPrices().size()];
+            for (List<Double> d:cryptoChartModelList.getData().getPrices()) {
+                System.out.println(d.get(0));
+
+            }
+
+            for (int i = 0; i < cryptoChartModelList.getData().getPrices().size(); i++) {
+                List<Double> doubleList = cryptoChartModelList.getData().getPrices().get(i);
+                dataPoints[i] = new DataPoint(doubleList.get(0),doubleList.get(1));
+            }
+
+            LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(dataPoints);
+            graph.addSeries(series);
+
+        });*/
+
+    }
+
+}
+
 /*        StaticLabelsFormatter staticLabelsFormatter = new StaticLabelsFormatter(graph);
         String[] dates = new String[]{"1","2","3","4"};
         staticLabelsFormatter.setHorizontalLabels(dates);
@@ -91,39 +112,7 @@ public class CryptoChartFragment extends BaseFragment<FragmentCryptoChartBinding
 */
 
 
-        //TODO buranın altı
 
-/*        viewModel.getCryptoChart().observe(getViewLifecycleOwner(), cryptoChartModelList-> {
-
-
-            DataPoint[] dataPoints = new DataPoint[cryptoChartModelList.getPrices().size()];
-     *//*       for (List<Double> d:cryptoChartModelList.getPrices()) {
-                System.out.println(d.get(0));
-
-            }*//*
-
-            for (int i = 0; i < cryptoChartModelList.getPrices().size(); i++) {
-                List<Double> doubleList = cryptoChartModelList.getPrices().get(i);
-                dataPoints[i] = new DataPoint(doubleList.get(0),doubleList.get(1));
-            }
-
-            LineGraphSeries<DataPoint> series = new LineGraphSeries<DataPoint>(dataPoints);
-            graph.addSeries(series);
-
-        });*/
-
-
-    }
-    public Context requirceContext() {
-        Context context = getContext();
-        if (context == null) {
-            throw new IllegalStateException("Fragment " + this + " not attached to a context.");
-        }
-        return context;
-    }
-
-
-}
 
 /*
             System.out.println(cryptoChartModelList.toString());

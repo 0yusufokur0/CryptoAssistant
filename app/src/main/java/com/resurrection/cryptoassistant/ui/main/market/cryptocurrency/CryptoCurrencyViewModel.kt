@@ -1,17 +1,13 @@
 package com.resurrection.cryptoassistant.ui.main.market.cryptocurrency
 
-import android.app.Application
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.resurrection.cryptoassistant.data.model.CryptoMarketModel
-import com.resurrection.cryptoassistant.data.repository.CryptoRepository
 import com.resurrection.cryptoassistant.data.repository.TestRepository
 import com.resurrection.cryptoassistant.ui.base.BaseViewModel
 import com.resurrection.cryptoassistant.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onStart
@@ -19,17 +15,19 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class CryptoCurrencyViewModel @Inject constructor(val cryptoRepository: TestRepository ) :
+class CryptoCurrencyViewModel @Inject constructor(val cryptoRepository: TestRepository) :
     BaseViewModel() {
-    var allCrypto = MutableLiveData<Resource<List<CryptoMarketModel>>>()
+    private var _allCrypto = MutableLiveData<Resource<List<CryptoMarketModel>>>()
+    var allCrypto : LiveData<Resource<List<CryptoMarketModel>>> = _allCrypto
 
     fun getAllCrypto() = viewModelScope.launch {
-            cryptoRepository.getAllCrypto().onStart {
-
+        cryptoRepository.getAllCrypto()
+            .onStart {
+                // Loading Animation
             }.catch {
-
+                // show fail load
             }.collect {
-                allCrypto.postValue(it)
+                _allCrypto.postValue(it)
             }
     }
 }

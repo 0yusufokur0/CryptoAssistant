@@ -5,14 +5,13 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import com.resurrection.cryptoassistant.BR
 import com.resurrection.cryptoassistant.R
-import com.resurrection.cryptoassistant.ui.base.BaseAdapter
 import com.resurrection.cryptoassistant.data.model.CryptoMarketModel
 import com.resurrection.cryptoassistant.databinding.CryptoCurrencyItemBinding
 import com.resurrection.cryptoassistant.databinding.FragmentCryptoCurrencyBinding
+import com.resurrection.cryptoassistant.ui.base.BaseAdapter
 import com.resurrection.cryptoassistant.ui.base.BaseFragment
 import com.resurrection.cryptoassistant.ui.main.market.details.CryptoDetailFragment
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Job
 
 @AndroidEntryPoint
 class CryptoCurrencyFragment : BaseFragment<FragmentCryptoCurrencyBinding>() {
@@ -31,13 +30,19 @@ class CryptoCurrencyFragment : BaseFragment<FragmentCryptoCurrencyBinding>() {
         cryptoDetail = CryptoDetailFragment(requireContext())
         viewModel.getAllCrypto()
         viewModel.allCrypto.observe(viewLifecycleOwner, Observer {
-            it?.let {
-                binding.cryptoCurrencyRecyclerView.adapter = BaseAdapter<CryptoMarketModel, CryptoCurrencyItemBinding>(R.layout.crypto_currency_item,it.data as ArrayList<CryptoMarketModel>,BR.crypto,this::adapterOnCLick)
+            it?.data?.let {
+                binding.cryptoCurrencyRecyclerView.adapter =
+                    BaseAdapter<CryptoMarketModel, CryptoCurrencyItemBinding>(
+                        R.layout.crypto_currency_item,
+                        it as ArrayList<CryptoMarketModel>,
+                        BR.crypto,
+                        this::adapterOnCLick
+                    )
             }
         })
     }
 
-    fun adapterOnCLick(cmm: CryptoMarketModel) {
+    private fun adapterOnCLick(cmm: CryptoMarketModel) {
         val bundle = Bundle()
         bundle.putString("cryptoId", cmm.cryptoId.toString())
         cryptoDetail!!.arguments = bundle
