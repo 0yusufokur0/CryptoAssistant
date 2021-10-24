@@ -19,7 +19,7 @@ class CryptoCurrencyFragment : BaseFragment<FragmentCryptoCurrencyBinding>() {
     private var cryptoDetail: CryptoDetailFragment? = null
     private val BASE_URL = "https://api.coingecko.com/api/v3/"
     private var cryptoModels: ArrayList<CryptoMarketModel>? = null
-    private var adapter: CryptoCurrencyAdapter? = null
+    private var adapter: BaseAdapter<CryptoMarketModel,CryptoCurrencyItemBinding>? = null
     val viewModel: CryptoCurrencyViewModel by viewModels()
 
     override fun getLayoutRes(): Int = R.layout.fragment_crypto_currency

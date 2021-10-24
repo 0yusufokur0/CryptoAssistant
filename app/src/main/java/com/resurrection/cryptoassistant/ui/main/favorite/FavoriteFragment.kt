@@ -7,13 +7,16 @@ import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
+import com.resurrection.cryptoassistant.BR
 import com.resurrection.cryptoassistant.R
 import com.resurrection.cryptoassistant.data.model.CryptoMarketModel
 import com.resurrection.cryptoassistant.data.model.FavouriteCryptoModel
+import com.resurrection.cryptoassistant.databinding.CryptoCurrencyItemBinding
 import com.resurrection.cryptoassistant.databinding.FragmentFavoriteBinding
+import com.resurrection.cryptoassistant.ui.base.BaseAdapter
 import com.resurrection.cryptoassistant.ui.base.BaseFragment
 import com.resurrection.cryptoassistant.ui.main.favorite.favoritedetail.FavoriteDetailFragment
-import com.resurrection.cryptoassistant.ui.main.market.cryptocurrency.CryptoCurrencyAdapter
+
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -25,30 +28,25 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
 
     override fun getLayoutRes(): Int = R.layout.fragment_favorite
 
-    fun adapterOnCLick(cmm: CryptoMarketModel) {
-        val bundle = Bundle()
-        bundle.putString("cryptoId", cmm.cryptoId.toString())
-        cryptoDetail!!.arguments = bundle
-        cryptoDetail!!.show(childFragmentManager, "Bottom Sheet")
-    }
-
     override fun init(savedInstanceState: Bundle?) {
         viewModel.getAllFavoriteCrypto()
         cryptoDetail = FavoriteDetailFragment()
+        setViewModelObserve()
 
-
+    }
+    
+    private fun setViewModelObserve(){
         viewModel.allFavoriteCrypto.observe(viewLifecycleOwner, Observer {
             it?.let {
                 if (it.data?.size != 0) {
-                    var adapter = CryptoCurrencyAdapter(
+                    var adapter = BaseAdapter<CryptoMarketModel, CryptoCurrencyItemBinding>(
+                        R.layout.crypto_currency_item,
                         it as ArrayList<CryptoMarketModel>,
+                        BR.crypto,
                         this::adapterOnCLick
                     )
                     binding.cryptoFavoriteRecyclerView.adapter = adapter
-                } else {
-                    println("veri yok firebase den çekicez")
-                    getfireStoreGetFavoriteList()
-                }
+                } else { getFromFirebase() }
             }
         })
 
@@ -66,30 +64,38 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
                     it.symbol
                 )
                 favoriteCryptoModels.add(cmm)
-                var adapter = CryptoCurrencyAdapter(favoriteCryptoModels, this::adapterOnCLick)
+
+                var adapter = BaseAdapter<CryptoMarketModel, CryptoCurrencyItemBinding>(
+                    R.layout.crypto_currency_item,
+                    favoriteCryptoModels,
+                    BR.crypto,
+                    this::adapterOnCLick
+                )
                 binding.cryptoFavoriteRecyclerView.adapter = adapter
             }
         })
     }
 
-    fun getfireStoreGetFavoriteList() {
+    private fun adapterOnCLick(cmm: CryptoMarketModel) {
+        val bundle = Bundle()
+        bundle.putString("cryptoId", cmm.cryptoId.toString())
+        cryptoDetail!!.arguments = bundle
+        cryptoDetail!!.show(childFragmentManager, "Bottom Sheet")
+    }
+    private fun getFromFirebase() {
         val user = Firebase.auth.currentUser
         if (user != null) {
-            var favList= ArrayList<FavouriteCryptoModel>()
             val database = Firebase.database
-            val myRef = database.getReference(user.uid).child("favorite").get().addOnSuccessListener {
-                println(it)
-                it.children.forEach {
-                    println("--------------------")
-                    var fcm :FavouriteCryptoModel = it.getValue(FavouriteCryptoModel::class.java)!!
-                    println(fcm.id+" "+fcm.currentPrice)
-                    viewModel.getCryptoDetailById(fcm.id)
-                }
-            }.addOnFailureListener {
-
-            }
-
-
+            
+                database.getReference(user.uid).child("favorite").get().addOnSuccessListener {
+                    println(it)
+                    it.children.forEach {
+                        var fcm: FavouriteCryptoModel =
+                            it.getValue(FavouriteCryptoModel::class.java)!!
+                        viewModel.getCryptoDetailById(fcm.id)
+                    }
+                }.addOnFailureListener { }
+            
             val db = FirebaseFirestore.getInstance()
             db.collection(user.uid).get()
                 .addOnSuccessListener { documentReference ->
@@ -98,28 +104,7 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
                     }
                 }
                 .addOnFailureListener { e -> }
-        } else {
-            // No user is signed in
-        }
-
-
-
-/*        val database = Firebase.database
-        val myRef = database.getReference(user.uid).child("favorite")
-            .child(checkId).get().addOnSuccessListener {
-                if (it.value == null){
-                    isFavorite.value = false
-                    println(it)
-                }else{
-                    isFavorite.value = true
-                }
-
-                println(it)
-            }.addOnFailureListener {
-                isFavorite.value = false
-            }*/
-
-
+        } else { /*No user is signed in*/ }
 
     }
 }
