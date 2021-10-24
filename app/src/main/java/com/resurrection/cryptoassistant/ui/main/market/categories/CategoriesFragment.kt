@@ -9,9 +9,7 @@ import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint
 class CategoriesFragment : BaseFragment<FragmentCategoriesBinding>() {
 
-    override fun getLayoutRes(): Int {
-        return R.layout.fragment_categories
-    }
+    override fun getLayoutRes(): Int = R.layout.fragment_categories
 
     override fun init(savedInstanceState: Bundle?) {
 

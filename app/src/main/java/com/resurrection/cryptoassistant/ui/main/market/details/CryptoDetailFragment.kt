@@ -25,12 +25,9 @@ class CryptoDetailFragment(private val mContext: Context) :
     private val viewModel: CryptoDetailViewModel by viewModels()
     var isFavorite: Boolean = false
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme)
-    }
 
     override fun init(savedInstanceState: Bundle?) {
+        binding.cryptoDetail = null
         val data = arguments?.getString("cryptoId")
         binding.progressbar.visibility = View.VISIBLE
         binding.favoriteImageView.changeIconColor(false)
@@ -55,7 +52,7 @@ class CryptoDetailFragment(private val mContext: Context) :
 
     }
 
-    fun setViewModels() {
+    private fun setViewModels() {
         viewModel.cryptoDetail.observe(viewLifecycleOwner, Observer {
             binding.cryptoDetail = null
             binding.cryptoDetail = it.data
@@ -103,6 +100,9 @@ class CryptoDetailFragment(private val mContext: Context) :
             PorterDuff.Mode.SRC_IN
         )
     }
+
+
+
 }
 
 
@@ -119,6 +119,7 @@ var cryptomarketModel = CryptoMarketModel(
     currentCrypto.marketData.priceChangePercentage24h,
     currentCrypto.symbol
 )*/
+
 
 
 

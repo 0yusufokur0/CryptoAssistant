@@ -35,7 +35,7 @@ class CryptoDetailViewModel @Inject constructor(val cryptoRepository: TestReposi
     var firebaseIsSended : MutableLiveData<Boolean?> = _firebaseIsSended
     var isRemoved : MutableLiveData<Boolean> = _isRemoved
 
-    fun getCryptoDetailById(id: String) = viewModelScope.launch {
+    fun getCryptoDetailById(id: String) = launchOnIO {
         cryptoRepository.getCryptoDetailById(id)
             .onStart {
                 // Loading Animation

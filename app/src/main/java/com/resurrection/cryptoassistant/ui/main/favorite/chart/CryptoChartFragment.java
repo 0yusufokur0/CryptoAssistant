@@ -32,14 +32,10 @@ public class CryptoChartFragment extends BaseFragment<FragmentCryptoChartBinding
     private CryptoChartViewModel viewModel;/* = ViewModelProviders.of(getParentFragment().requireActivity()).get(CryptoChartViewModel.class);*/
 
     @Override
-    public int getLayoutRes() {
-        return R.layout.fragment_crypto_chart;
-    }
+    public int getLayoutRes() { return R.layout.fragment_crypto_chart; }
 
     @Override
-    public void init(@Nullable Bundle savedInstanceState) {
-
-    }
+    public void init(@Nullable Bundle savedInstanceState) { }
 
 
     @Override

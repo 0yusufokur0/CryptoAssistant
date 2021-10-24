@@ -23,9 +23,7 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
     private var favoriteCryptoModels = ArrayList<CryptoMarketModel>()
     private var cryptoDetail: FavoriteDetailFragment? = null
 
-    override fun getLayoutRes(): Int {
-        return R.layout.fragment_favorite
-    }
+    override fun getLayoutRes(): Int = R.layout.fragment_favorite
 
     fun adapterOnCLick(cmm: CryptoMarketModel) {
         val bundle = Bundle()

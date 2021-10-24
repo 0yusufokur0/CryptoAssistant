@@ -11,13 +11,13 @@ import com.resurrection.cryptoassistant.ui.main.market.simulator.SimulatorFragme
 class ViewPagerAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
     FragmentStateAdapter(fragmentManager, lifecycle) {
 
-    override fun getItemCount(): Int = 3
+    override fun getItemCount(): Int = 2
 
     override fun createFragment(position: Int): Fragment {
         return when (position) {
             0 -> CryptoCurrencyFragment()
-            1 -> CategoriesFragment()
-            2 -> SimulatorFragment()
+            /*1 -> CategoriesFragment()*/
+            1 -> SimulatorFragment()
             else -> Fragment()
         }
     }

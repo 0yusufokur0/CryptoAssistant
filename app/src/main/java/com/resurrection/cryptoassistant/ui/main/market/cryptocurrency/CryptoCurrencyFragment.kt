@@ -22,9 +22,7 @@ class CryptoCurrencyFragment : BaseFragment<FragmentCryptoCurrencyBinding>() {
     private var adapter: CryptoCurrencyAdapter? = null
     val viewModel: CryptoCurrencyViewModel by viewModels()
 
-    override fun getLayoutRes(): Int {
-        return R.layout.fragment_crypto_currency
-    }
+    override fun getLayoutRes(): Int = R.layout.fragment_crypto_currency
 
     override fun init(savedInstanceState: Bundle?) {
         cryptoDetail = CryptoDetailFragment(requireContext())

@@ -1,22 +1,24 @@
 package com.resurrection.cryptoassistant.ui.base
 
-import android.app.Application
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ViewModel
-import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.launch
 import kotlin.coroutines.CoroutineContext
 
-abstract class BaseViewModel : ViewModel(), CoroutineScope {
+open class BaseViewModel : ViewModel(), LifecycleObserver, CoroutineScope {
+    private var job: Job? = null
 
-    private val job = Job()
+    override val coroutineContext: CoroutineContext get() = Dispatchers.IO
 
-    override val coroutineContext: CoroutineContext get() = job + Dispatchers.IO
+    fun launchOnIO(function: suspend () -> Unit) {
+        job = launch { function() }
+    }
 
     override fun onCleared() {
         super.onCleared()
-        job.cancel()
+        job?.cancel()
     }
 }

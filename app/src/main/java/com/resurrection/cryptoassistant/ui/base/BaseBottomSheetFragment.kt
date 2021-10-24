@@ -32,6 +32,7 @@ abstract class BaseBottomSheetFragment<VDB : ViewDataBinding> : BottomSheetDialo
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        _binding = null
         _binding = DataBindingUtil.inflate(inflater, getLayoutRes(), container, false)
         return _binding?.root
     }

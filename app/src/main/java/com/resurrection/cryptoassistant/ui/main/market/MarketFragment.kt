@@ -18,9 +18,9 @@ class MarketFragment : BaseFragment<FragmentMarketBinding>() {
 
         TabLayoutMediator(binding.tabLayout, binding.viewPager2) { tab, position ->
             when (position) {
-                0 -> tab.text = "CRYPTO CURRENCY"
-                1 -> tab.text = "CATEGORIES"
-                2 -> tab.text = "SIMULATOR"
+                0 -> tab.text = "CRYPTOCURRENCY"
+                /*1 -> tab.text = "CATEGORIES"*/
+                1 -> tab.text = "SIMULATOR"
             }
         }.attach()
     }

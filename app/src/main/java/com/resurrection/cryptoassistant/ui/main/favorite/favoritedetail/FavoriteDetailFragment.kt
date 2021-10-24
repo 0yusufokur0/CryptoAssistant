@@ -19,15 +19,11 @@ class FavoriteDetailFragment : BaseBottomSheetFragment<FragmentFavoriteDetailBin
 
     private val viewModel : FavoriteDetailViewModel by viewModels()
 
-    override fun getLayoutRes(): Int { return R.layout.fragment_favorite_detail }
+    override fun getLayoutRes(): Int = R.layout.fragment_favorite_detail
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(BottomSheetDialogFragment.STYLE_NORMAL, R.style.CustomBottomSheetDialogTheme)
-        /*              val data = arguments?.getString("cryptoId")
-      val bundle = Bundle()
-      bundle.putString("cryptoId", cmm.cryptoId.toString())
-      cryptoDetail!!.arguments = bundle*/
 
     }
     override fun init(savedInstanceState: Bundle?) {

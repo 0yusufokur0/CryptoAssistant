@@ -8,9 +8,7 @@ import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class SimulatorFragment : BaseFragment<FragmentSimulatorBinding>() {
-    override fun getLayoutRes(): Int {
-        return R.layout.fragment_simulator
-    }
+    override fun getLayoutRes(): Int = R.layout.fragment_simulator
 
     override fun init(savedInstanceState: Bundle?) {
     }
