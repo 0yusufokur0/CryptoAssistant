@@ -19,7 +19,7 @@ import com.resurrection.cryptoassistant.R
 
 
 @BindingAdapter("loadImageFromUrl")
-fun ImageView.loadImage(imageUrl: String) {
+fun ImageView.loadImage(imageUrl: String?) {
     val circularProgressDrawable = CircularProgressDrawable(this.context)
     circularProgressDrawable.strokeWidth = 10f
     circularProgressDrawable.centerRadius = 30f
@@ -30,7 +30,7 @@ fun ImageView.loadImage(imageUrl: String) {
         var requestOptions = RequestOptions()
         requestOptions = requestOptions.transforms(CenterCrop(), RoundedCorners(25))
         Glide.with(this)
-            .load(imageUrl)/*.override(500,750)*/
+            .load(imageUrl).override(750,750)
             .placeholder(circularProgressDrawable)
             .error(R.drawable.image_not_found)  // any image in case of error
             .apply(requestOptions)

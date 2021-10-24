@@ -1,7 +1,7 @@
 package com.resurrection.cryptoassistant.ui.main.market.details
 
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.viewModelScope
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
@@ -11,11 +11,9 @@ import com.resurrection.cryptoassistant.data.repository.TestRepository
 import com.resurrection.cryptoassistant.ui.base.BaseViewModel
 import com.resurrection.cryptoassistant.util.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.catch
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.onStart
-import kotlinx.coroutines.launch
 import java.text.SimpleDateFormat
 import java.util.*
 import javax.inject.Inject
@@ -30,20 +28,16 @@ class CryptoDetailViewModel @Inject constructor(val cryptoRepository: TestReposi
     private var _firebaseIsSended = MutableLiveData<Boolean?>()
     private var _isRemoved = MutableLiveData<Boolean>()
 
-    var cryptoDetail : MutableLiveData<Resource<CryptoDetailItem>> = _cryptoDetail
-    var isFavorite : MutableLiveData<Boolean?> = _isFavorite
-    var firebaseIsSended : MutableLiveData<Boolean?> = _firebaseIsSended
-    var isRemoved : MutableLiveData<Boolean> = _isRemoved
+    var cryptoDetail: LiveData<Resource<CryptoDetailItem>> = _cryptoDetail
+    var isFavorite: LiveData<Boolean?> = _isFavorite
+    var firebaseIsSended: LiveData<Boolean?> = _firebaseIsSended
+    var isRemoved: LiveData<Boolean> = _isRemoved
 
     fun getCryptoDetailById(id: String) = launchOnIO {
         cryptoRepository.getCryptoDetailById(id)
-            .onStart {
-                // Loading Animation
-            }.catch {
-                // fail load
-            }.collect {
-                cryptoDetail.postValue(it)
-            }
+            .onStart { _cryptoDetail.postValue(Resource.Loading()) }
+            .catch { _cryptoDetail.postValue(Resource.Error(it)) }
+            .collect { _cryptoDetail.postValue(it) }
     }
 
     fun insertFavoriteCrypto(cryptoDetail: CryptoDetailItem) {
@@ -61,9 +55,9 @@ class CryptoDetailViewModel @Inject constructor(val cryptoRepository: TestReposi
             val myRef = database.getReference(user.uid).child("favorite")
                 .child(cryptoDetail.id).setValue(test)
                 .addOnSuccessListener {
-                    firebaseIsSended.value = true
+                    _firebaseIsSended.value = true
                 }.addOnFailureListener {
-                    firebaseIsSended.value = false
+                    _firebaseIsSended.value = false
                 }
         } else { /*No user is signed in */
         }
@@ -77,9 +71,9 @@ class CryptoDetailViewModel @Inject constructor(val cryptoRepository: TestReposi
             val myRef = database.getReference(user.uid).child("favorite")
                 .child(id).setValue(null)
                 .addOnSuccessListener {
-                    isRemoved.value = true
+                    _isRemoved.value = true
                 }.addOnFailureListener {
-                    isRemoved.value = false
+                    _isRemoved.value = false
                 }
         } else { /*No user is signed in */
         }
@@ -92,14 +86,14 @@ class CryptoDetailViewModel @Inject constructor(val cryptoRepository: TestReposi
             val myRef = database.getReference(user.uid).child("favorite")
                 .child(checkId).get().addOnSuccessListener {
                     if (it.value == null) {
-                        isFavorite.value = false
+                        _isFavorite.value = false
                         println(it)
                     } else {
-                        isFavorite.value = true
+                        _isFavorite.value = true
                     }
 
                     println(it)
-                }.addOnFailureListener { isFavorite.value = false }
+                }.addOnFailureListener { _isFavorite.value = false }
 
         } else { // No user is signed in }
         }

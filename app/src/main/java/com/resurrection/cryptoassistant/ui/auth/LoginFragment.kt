@@ -5,7 +5,7 @@ import android.os.Bundle
 import com.google.firebase.auth.FirebaseAuth
 import com.resurrection.cryptoassistant.databinding.FragmentLoginBinding
 import com.resurrection.cryptoassistant.ui.base.BaseFragment
-import com.resurrection.cryptoassistant.ui.main.HomeActivity
+import com.resurrection.cryptoassistant.ui.main.MainActivity
 
 import com.resurrection.cryptoassistant.R
 
@@ -22,7 +22,7 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>() {
                 binding.editLoginEmail.editableText.toString(),
                 binding.editLoginPasswd.editableText.toString()
             ).addOnSuccessListener {
-                startActivity(Intent(activity, HomeActivity::class.java))
+                startActivity(Intent(activity, MainActivity::class.java))
             }.addOnFailureListener {
 
             }

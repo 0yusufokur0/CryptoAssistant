@@ -10,7 +10,7 @@ import com.resurrection.cryptoassistant.R
 import com.resurrection.cryptoassistant.databinding.ActivitySplashBinding
 import com.resurrection.cryptoassistant.ui.auth.AuthActivity
 import com.resurrection.cryptoassistant.ui.base.BaseActivity
-import com.resurrection.cryptoassistant.ui.main.HomeActivity
+import com.resurrection.cryptoassistant.ui.main.MainActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @SuppressLint("CustomSplashScreen")
@@ -27,7 +27,7 @@ class SplashActivity : BaseActivity<ActivitySplashBinding>(), Animation.Animatio
     override fun init(savedInstanceState: Bundle?) {
         if (FirebaseAuth.getInstance().currentUser != null) {
             loginState = true
-            startActivity(Intent(this@SplashActivity, HomeActivity::class.java))
+            startActivity(Intent(this@SplashActivity, MainActivity::class.java))
             overridePendingTransition(R.anim.fade_in, R.anim.fade_in)
         } else {
             animationImageView = AnimationUtils.loadAnimation(applicationContext, R.anim.zoom_out)

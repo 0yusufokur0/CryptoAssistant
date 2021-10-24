@@ -86,11 +86,11 @@
                         android:layout_width="55dp"
                         android:layout_height="55dp"
                         android:layout_marginLeft="0dp"
+                        loadImageFromUrl="@{cryptoDetail.image.large}"
                         android:layout_marginTop="16dp"
                         app:layout_constraintBottom_toBottomOf="@id/txtAthChangePercentage"
                         app:layout_constraintLeft_toLeftOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/coinNameTextView" />
-
 
                     <TextView
                         android:id="@+id/txtCoinCurrentPrice"

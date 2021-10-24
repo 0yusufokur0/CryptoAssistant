@@ -15,6 +15,8 @@ import com.resurrection.cryptoassistant.R
 import com.resurrection.cryptoassistant.data.model.CryptoDetailItem
 import com.resurrection.cryptoassistant.databinding.FragmentCryptoDetailBinding
 import com.resurrection.cryptoassistant.ui.base.BaseBottomSheetFragment
+import com.resurrection.cryptoassistant.util.Status
+import com.resurrection.cryptoassistant.util.Status.*
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -54,11 +56,13 @@ class CryptoDetailFragment(private val mContext: Context) :
 
     private fun setViewModels() {
         viewModel.cryptoDetail.observe(viewLifecycleOwner, Observer {
-            binding.cryptoDetail = null
-            binding.cryptoDetail = it.data
-            println(it.data?.image?.small.toString())
-            Glide.with(requireContext()).load(it.data?.image?.large).into(binding.imgIconImage)
-            binding.progressbar.visibility = View.INVISIBLE
+            when (it.status) {
+                SUCCESS ->{ it.data?.let { binding.cryptoDetail = it }
+                    binding.progressbar.visibility = View.INVISIBLE
+                }
+                LOADING -> binding.progressbar.visibility = View.VISIBLE
+                ERROR -> binding.progressbar.visibility = View.INVISIBLE
+            }
         })
 
         viewModel.isFavorite.observe(viewLifecycleOwner, Observer {
